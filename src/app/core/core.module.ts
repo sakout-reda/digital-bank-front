@@ -1,3 +1,4 @@
+
 import {NgModule, Optional, SkipSelf} from "@angular/core";
 
 @NgModule({
@@ -5,14 +6,14 @@ import {NgModule, Optional, SkipSelf} from "@angular/core";
   imports: [],
   providers: [],
 })
-export class ViewsModule{
+export class CoreModule{
   constructor(
     @Optional()
     @SkipSelf()
-      parentModule: ViewsModule
+      parentModule: CoreModule
   ) {
     if (parentModule) {
-      throw new Error('ViewsModule is already loaded. Import it in the AppModule only.');
+      throw new Error('CoreModule is already loaded. Import it in the AppModule only.');
     }
   }
 }
