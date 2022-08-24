@@ -1,7 +1,10 @@
 import {NgModule, Optional, SkipSelf} from "@angular/core";
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HomeComponent
+  ],
   imports: [],
   providers: [],
 })

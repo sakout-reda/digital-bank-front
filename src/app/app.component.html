@@ -1,9 +1,16 @@
 <nb-layout>
-  <nb-layout-header fixed> Company Name</nb-layout-header>
+  <nb-layout-header fixed>
+    <DB-header></DB-header>
+  </nb-layout-header>
 
-  <nb-sidebar>Sidebar Content</nb-sidebar>
+  <nb-sidebar>
+    <DB-sidebar></DB-sidebar>
+  </nb-sidebar>
 
   <nb-layout-column>
-    Page Content <button nbButton>Hello World</button>
+    <router-outlet></router-outlet>
   </nb-layout-column>
+  <nb-layout-footer>
+    <DB-footer></DB-footer>
+  </nb-layout-footer>
 </nb-layout>

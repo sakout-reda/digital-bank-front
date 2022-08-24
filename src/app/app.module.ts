@@ -8,12 +8,15 @@ import {CoreModule} from "./core/core.module";
 import {LayoutModule} from "./layout/layout.module";
 import {SharedModule} from "./shared/shared.module";
 import {ViewsModule} from "./views/views.module";
+import {FeaturesModule} from "./features/features.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NbThemeModule.forRoot({ name: 'corporate' }),
     NbLayoutModule,
@@ -22,7 +25,8 @@ import {ViewsModule} from "./views/views.module";
     CoreModule,
     LayoutModule,
     SharedModule,
-    ViewsModule
+    ViewsModule,
+    FeaturesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
