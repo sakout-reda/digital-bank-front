@@ -11,7 +11,7 @@ export class CustomerService {
   host = environment.host;
   constructor(private http:HttpClient) { }
 
-  public getCustomers():Observable<CustomerPagination>{
-    return this.http.get<CustomerPagination>(this.host+"customers");
+  public getCustomers(elementPerPage:number,pageNumber:number):Observable<CustomerPagination>{
+    return this.http.get<CustomerPagination>(this.host+"customers?page="+pageNumber+"&size="+elementPerPage);
   }
 }

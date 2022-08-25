@@ -11,26 +11,36 @@ import {CustomerPagination} from "../../../../core/models/customer-pagination.mo
   styleUrls: ['./customers-list.component.scss']
 })
 export class CustomersListComponent implements OnInit {
-  data$: Observable<AppDataState<CustomerPagination>> |undefined;
-  errorMessage!:string;
-  readonly DataStateEnum=DataStateEnum;
+  data$: Observable<AppDataState<CustomerPagination>> | undefined;
+  errorMessage!: string;
+  readonly DataStateEnum = DataStateEnum;
   addFormActive = true;
   elementPerPage = 10;
+  pageNumber = 0;
   positions = NbGlobalPhysicalPosition;
 
 
-  constructor(private customerService:CustomerService, private toastrService: NbToastrService) {
+  constructor(private customerService: CustomerService, private toastrService: NbToastrService) {
   }
 
   ngOnInit(): void {
-    this.data$=this.customerService.getCustomers().pipe(
-      map(response=>{
-        console.info(response)
-        return ({dataState:DataStateEnum.LOADED,data:response})
+
+    this.fetchData();
+
+  }
+
+  fetchData() {
+    this.data$ = this.customerService.getCustomers(this.elementPerPage,this.pageNumber).pipe(
+      map(response => {
+        return ({dataState: DataStateEnum.LOADED, data: response})
 
       }),
-      startWith({dataState:DataStateEnum.LOADING}),
-      catchError(err=>of({dataState:DataStateEnum.ERROR, errorMessage:err.message, this:this.showToast( 'Une erreur technique est survenue',"Erreur","danger")}))
+      startWith({dataState: DataStateEnum.LOADING}),
+      catchError(err => of({
+        dataState: DataStateEnum.ERROR,
+        errorMessage: err.message,
+        this: this.showToast('Une erreur technique est survenue', "Erreur", "danger")
+      }))
     );
   }
 
@@ -39,7 +49,10 @@ export class CustomersListComponent implements OnInit {
     console.log("im working");
   }
 
-  sortBy(value: string) {
+  sortBy(value
+           :
+           string
+  ) {
     value.toString();
     switch (value) {
       case 'fullName': {
@@ -65,8 +78,25 @@ export class CustomersListComponent implements OnInit {
     }
   }
 
-  showToast(message:string, title:string, status:string) {
-    this.toastrService.show( message, title,{status, duration:0} );
+
+  showToast(message: string, title: string, status: string) {
+    return this.toastrService.show(message, title, {status, duration: 0});
   }
 
+  toTotalPages(i: number) {
+    return new Array(i);
+  }
+
+  onElementPerPageChange(event: string) {
+    this.elementPerPage=+event;
+    this.pageNumber=0;
+    this.fetchData();
+    console.log("Element per page: "+event);
+
+  }
+  onPageNumberChange(event:number){
+    this.pageNumber=event;
+    this.fetchData();
+    console.log("Page Number : "+event);
+  }
 }
