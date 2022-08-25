@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerService} from "../../services/customer.service";
 import {catchError, map, Observable, of, startWith} from "rxjs";
-import {Customer} from "../../../../core/models/customer.model";
 import {AppDataState, DataStateEnum} from "../../../../core/models/loading-state.model";
 import {NbGlobalPhysicalPosition, NbToastrService} from "@nebular/theme";
+import {CustomerPagination} from "../../../../core/models/customer-pagination.model";
 
 @Component({
   selector: 'app-customers-list',
@@ -11,7 +11,7 @@ import {NbGlobalPhysicalPosition, NbToastrService} from "@nebular/theme";
   styleUrls: ['./customers-list.component.scss']
 })
 export class CustomersListComponent implements OnInit {
-  customers$: Observable<AppDataState<Customer[]>> |undefined;
+  data$: Observable<AppDataState<CustomerPagination>> |undefined;
   errorMessage!:string;
   readonly DataStateEnum=DataStateEnum;
   addFormActive = true;
@@ -23,9 +23,11 @@ export class CustomersListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.customers$=this.customerService.getCustomers().pipe(
-      map(data=>{
-        return ({dataState:DataStateEnum.LOADED,data:data})
+    this.data$=this.customerService.getCustomers().pipe(
+      map(response=>{
+        console.info(response)
+        return ({dataState:DataStateEnum.LOADED,data:response})
+
       }),
       startWith({dataState:DataStateEnum.LOADING}),
       catchError(err=>of({dataState:DataStateEnum.ERROR, errorMessage:err.message, this:this.showToast( 'Une erreur technique est survenue',"Erreur","danger")}))
