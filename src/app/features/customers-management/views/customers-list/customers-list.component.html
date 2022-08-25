@@ -90,7 +90,7 @@
                 <nb-icon icon="chevron-left"></nb-icon>
               </button>
             </li>
-            <li class="list-group-item text-truncate" *ngFor='let in of toTotalPages(5) ;let i = index'>
+            <li class="list-group-item text-truncate" *ngFor='let nbr of toTotalPages(5) ;let i = index'>
               <button (click)="onPageNumberChange(i)" [ngClass]="pageNumber==i ?'text-light bg-primary' : 'text-primary'" class="btn ">
                 {{i + 1}}
               </button>
@@ -100,7 +100,7 @@
                 ...
               </button>
             </li>
-            <li class="list-group-item text-truncate" *ngFor='let in of toTotalPages(4) ;let i = index'>
+            <li class="list-group-item text-truncate" *ngFor='let nbr of toTotalPages(4) ;let i = index'>
               <button (click)="onPageNumberChange(result?.data!.totalPages - 4 + i)" [ngClass]="pageNumber==result?.data!.totalPages - 4 + i ?'text-light bg-primary' : 'text-primary'" class="btn ">
                 {{result?.data!.totalPages - 4 + i}}
               </button>
@@ -130,7 +130,7 @@
               </button>
             </li>
             <li class="list-group-item text-truncate"
-                *ngFor='let in of toTotalPages(result?.data!.totalPages) ;let i = index'>
+                *ngFor='let nbr of toTotalPages(result?.data!.totalPages) ;let i = index'>
               <button (click)="onPageNumberChange(i)" [ngClass]="pageNumber==i ?'text-light bg-primary' : 'text-primary'" class="btn ">
                 {{i + 1}}
               </button>
