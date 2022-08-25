@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NbIconLibraries, NbMenuItem} from "@nebular/theme";
+import {NbMenuItem} from "@nebular/theme";
 
 @Component({
   selector: 'DB-sidebar',
@@ -35,12 +35,6 @@ export class SidebarComponent implements OnInit {
       ],
     },
   ];
-
-  constructor(private iconLibraries: NbIconLibraries) {
-    this.iconLibraries.registerFontPack('bi', {iconClassPrefix: 'bi'});
-    this.iconLibraries.setDefaultPack('bi');
-  }
-
   ngOnInit(): void {
   }
 

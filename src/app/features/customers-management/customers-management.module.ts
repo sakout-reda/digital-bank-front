@@ -14,7 +14,7 @@ export class CustomersManagementModule {
       parentModule: CustomersManagementModule
   ) {
     if (parentModule) {
-      throw new Error('CustomersManagementModule is already loaded. Import it in the AppModule only.');
+      throw new Error('LayoutModule is already loaded. Import it in the AppModule only.');
     }
   }
 }

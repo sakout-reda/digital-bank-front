@@ -10,6 +10,7 @@ import {SharedModule} from "./shared/shared.module";
 import {ViewsModule} from "./views/views.module";
 import {FeaturesModule} from "./features/features.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientModule} from "@angular/common/http";
 @NgModule({
   declarations: [
     AppComponent
@@ -18,6 +19,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     NbThemeModule.forRoot({ name: 'corporate' }),
     NbLayoutModule,
     NbSidebarModule.forRoot(),
