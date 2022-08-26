@@ -5,6 +5,7 @@ export interface CustomerPagination{
   totalPages:number,
   totalElements:number,
   size:number,
+  number:number,
   first:boolean,
   last:boolean
 }
