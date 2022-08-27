@@ -105,7 +105,7 @@
           </thead>
           <tbody>
           <tr>
-            <td><input class="form-control" placeholder="Full Name"></td>
+            <td><input (keyup)="onSearch('fullName',$event)"class="form-control" placeholder="Full Name"></td>
             <td><input class="form-control" placeholder="Birthday"></td>
             <td><input class="form-control" placeholder="Phone Number"></td>
             <td><input class="form-control" placeholder="Adress"></td>

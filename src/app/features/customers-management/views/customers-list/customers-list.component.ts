@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerService} from "../../services/customer.service";
-import {catchError, map, Observable, of, startWith} from "rxjs";
+import {catchError, debounce, debounceTime, fromEvent, map, Observable, of, startWith} from "rxjs";
 import {AppDataState, DataStateEnum} from "../../../../core/models/loading-state.model";
 import {NbGlobalPhysicalPosition, NbToastrService} from "@nebular/theme";
 import {CustomerPagination} from "../../../../core/models/customer-pagination.model";
@@ -20,6 +20,7 @@ export class CustomersListComponent implements OnInit {
   sortDirection = true;
   IsHidden = true;
   sortValue: string = "";
+  currenSearchValue: string = "";
   positions = NbGlobalPhysicalPosition;
 
 
@@ -80,5 +81,16 @@ export class CustomersListComponent implements OnInit {
   onPageNumberChange(event: number) {
     this.pageNumber = event;
     this.fetchData();
+  }
+
+  onSearch(value: string, event: any) {
+    (async () => {
+      await this.delay(1000);
+        console.log("Searching by :" + value + " Keyword : " + event.target.value);
+    })();
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
