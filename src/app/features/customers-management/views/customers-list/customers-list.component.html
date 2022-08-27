@@ -93,12 +93,23 @@
             </button>
           </li>
           <li class="list-group-item text-truncate"
-              *ngFor='let nbr of toTotalPages(10) ;let i = index'>
-            <button (click)="onPageNumberChange(result?.data!.number < 5 ? i : result?.data!.number-5+i)"
-                    [ngClass]="pageNumber==(result?.data!.number < 5 ? i : result?.data!.number-5 + i) ?'text-light bg-primary' : 'text-primary'"
-                    class="btn ">
-              {{(result?.data!.number < 5 ? 1 + i : result?.data!.number - 4 + i)}}
-            </button>
+              *ngFor='let nbr of toTotalPages(9) ;let i = index'>
+
+            <span *ngIf="result?.data!.number <= result?.data!.totalPages-9;else printlastPages">
+              <button (click)="onPageNumberChange(result?.data!.number < 5 ? i : result?.data!.number-4+i)"
+                      [ngClass]="pageNumber==(result?.data!.number < 5 ? i : result?.data!.number-4 + i) ?'text-light bg-primary' : 'text-primary'"
+                      class="btn ">
+                {{(result?.data!.number < 5 ? 1 + i : result?.data!.number - 3 + i)}}
+              </button>
+            </span>
+            <ng-template #printlastPages>
+              <button (click)="onPageNumberChange(result?.data!.totalPages - 9 + i)"
+                      [ngClass]="pageNumber==(result?.data!.totalPages - 9 + i) ?'text-light bg-primary' : 'text-primary'"
+                      class="btn ">
+                {{(result?.data!.totalPages - 8 + i)}}
+              </button>
+            </ng-template>
+
           </li>
           <li class="list-group-item">
             <button (click)="onPageNumberChange(pageNumber+1)"
