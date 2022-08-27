@@ -93,13 +93,14 @@
             </button>
           </li>
           <li class="list-group-item text-truncate"
-              *ngFor='let nbr of toTotalPages(9) ;let i = index'>
+              *ngFor='let nbr of toTotalPages(result?.data!.totalPages <9 ? result?.data!.totalPages : 9) ;let i = index'>
 
-            <span *ngIf="result?.data!.number <= result?.data!.totalPages-9;else printlastPages">
+            <span
+              *ngIf="(result?.data!.number <= result?.data!.totalPages-9) || (result?.data!.totalPages <9);else printlastPages">
               <button (click)="onPageNumberChange(result?.data!.number < 5 ? i : result?.data!.number-4+i)"
                       [ngClass]="pageNumber==(result?.data!.number < 5 ? i : result?.data!.number-4 + i) ?'text-light bg-primary' : 'text-primary'"
                       class="btn ">
-                {{(result?.data!.number < 5 ? 1 + i : result?.data!.number - 3 + i)}}
+                {{(result?.data!.number <5 ? 1 + i : result?.data!.number - 3 + i)}}
               </button>
             </span>
             <ng-template #printlastPages>
