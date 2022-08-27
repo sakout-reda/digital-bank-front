@@ -81,37 +81,41 @@
       <nb-card-footer class="d-flex justify-content-center">
         <ul class="list-group list-group-horizontal">
           <li class="list-group-item">
-            <button [ngClass]="result?.data?.first ? 'text-gray disabled border-light' : 'text-primary'" class="btn">
+            <button (click)="onPageNumberChange(0)"
+                    [ngClass]="result?.data?.first ? 'text-gray disabled border-light' : 'text-primary'" class="btn">
               <nb-icon icon="chevron-double-left"></nb-icon>
             </button>
           </li>
           <li class="list-group-item">
-            <button [ngClass]="result?.data?.first ? 'text-gray disabled border-light' : 'text-primary'" class="btn">
+            <button (click)="onPageNumberChange(pageNumber-1)"
+                    [ngClass]="result?.data?.first ? 'text-gray disabled border-light' : 'text-primary'" class="btn">
               <nb-icon icon="chevron-left"></nb-icon>
             </button>
           </li>
-            <li class="list-group-item text-truncate"
-                *ngFor='let nbr of toTotalPages(5) ;let i = index'>
-              <button (click)="onPageNumberChange(result?.data!.number < 2 ? i : result?.data!.number-2+i)"
-                      [ngClass]="pageNumber==(result?.data!.number < 2 ? i : result?.data!.number-2 + i) ?'text-light bg-primary' : 'text-primary'"
-                      class="btn ">
-                {{(result?.data!.number < 2 ? 1+i : result?.data!.number-1+i)}}
-              </button>
-            </li>
-<!--          </ng-template>-->
+          <li class="list-group-item text-truncate"
+              *ngFor='let nbr of toTotalPages(10) ;let i = index'>
+            <button (click)="onPageNumberChange(result?.data!.number < 5 ? i : result?.data!.number-5+i)"
+                    [ngClass]="pageNumber==(result?.data!.number < 5 ? i : result?.data!.number-5 + i) ?'text-light bg-primary' : 'text-primary'"
+                    class="btn ">
+              {{(result?.data!.number < 5 ? 1 + i : result?.data!.number - 4 + i)}}
+            </button>
+          </li>
           <li class="list-group-item">
-            <button [ngClass]="result?.data?.last ? 'text-gray disabled border-light' : 'text-primary'" class="btn">
+            <button (click)="onPageNumberChange(pageNumber+1)"
+                    [ngClass]="result?.data?.last ? 'text-gray disabled border-light' : 'text-primary'" class="btn">
               <nb-icon icon="chevron-right"></nb-icon>
             </button>
           </li>
           <li class="list-group-item">
-            <button [ngClass]="result?.data?.last ? 'text-gray disabled border-light' : 'text-primary'" class="btn">
+            <button (click)="onPageNumberChange(result?.data!.totalPages -1 )"
+                    [ngClass]="result?.data?.last ? 'text-gray disabled border-light' : 'text-primary'" class="btn">
               <nb-icon icon="chevron-double-right"></nb-icon>
             </button>
           </li>
         </ul>
       </nb-card-footer>
-
     </nb-card>
   </ng-container>
 </ng-container>
+
+

@@ -12,7 +12,7 @@ export class SidebarComponent implements OnInit {
     {
       title: 'Home',
       icon: 'house-door-fill',
-      link: ''
+      link: '/'
     },
     {
       title: 'Customers',
