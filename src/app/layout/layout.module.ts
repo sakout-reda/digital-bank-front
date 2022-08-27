@@ -1,20 +1,22 @@
-
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {HeaderComponent} from "./header/header.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {FooterComponent} from "./footer/footer.component";
 import {NbCardModule, NbMenuModule} from "@nebular/theme";
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    LoadingComponent,
   ],
   exports: [
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    LoadingComponent,
   ],
   imports: [
     NbCardModule,

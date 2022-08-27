@@ -1,8 +1,9 @@
 import {NgModule, Optional, SkipSelf} from "@angular/core";
-import { AccountsComponent } from './accounts-management/accounts.component';
+import {AccountsComponent} from './accounts-management/accounts.component';
 import {CustomersListComponent} from "./customers-management/views/customers-list/customers-list.component";
 import {NbCardModule, NbIconModule, NbSelectModule, NbToastrModule} from "@nebular/theme";
 import {CommonModule} from "@angular/common";
+import {LayoutModule} from "../layout/layout.module";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {CommonModule} from "@angular/common";
     NbIconModule,
     CommonModule,
     NbToastrModule.forRoot(),
+    LayoutModule,
   ],
   providers: [],
 })

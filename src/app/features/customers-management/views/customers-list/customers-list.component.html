@@ -1,6 +1,6 @@
 <ng-container *ngIf="(data$ | async) as result" [ngSwitch]="result.dataState">
   <ng-container *ngSwitchCase="DataStateEnum.LOADING">
-    Loading .....
+    <DB-loading></DB-loading>
   </ng-container>
   <ng-container *ngSwitchCase="DataStateEnum.LOADED">
     <nb-card>
