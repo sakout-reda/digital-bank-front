@@ -17,6 +17,9 @@ export class CustomersListComponent implements OnInit {
   addFormActive = true;
   elementPerPage = 10;
   pageNumber = 0;
+  sortDirection = true;
+  IsHidden = true;
+  sortValue: string = "";
   positions = NbGlobalPhysicalPosition;
 
 
@@ -24,13 +27,12 @@ export class CustomersListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.fetchData();
 
   }
 
   fetchData() {
-    this.data$ = this.customerService.getCustomers(this.elementPerPage,this.pageNumber).pipe(
+    this.data$ = this.customerService.getCustomers(this.elementPerPage, this.pageNumber, this.sortValue, this.sortDirection ? 'ASC' : 'DESC').pipe(
       map(response => {
         return ({dataState: DataStateEnum.LOADED, data: response})
 
@@ -49,33 +51,14 @@ export class CustomersListComponent implements OnInit {
     console.log("im working");
   }
 
-  sortBy(value
-           :
-           string
-  ) {
-    value.toString();
-    switch (value) {
-      case 'fullName': {
-        console.log(("Sorting By : fullName"))
-        break;
-      }
-      case 'birthday': {
-        console.log(("Sorting By : birthday"))
-        break;
-      }
-      case 'phoneNumber': {
-        console.log(("Sorting By : phoneNumber"))
-        break;
-      }
-      case 'adress': {
-        console.log(("Sorting By : adress"))
-        break;
-      }
-      case 'email': {
-        console.log(("Sorting By : email"))
-        break;
-      }
+  sortBy(value: string) {
+    if (this.sortValue == value.toString()) {
+      this.sortDirection = !this.sortDirection;
+    } else {
+      this.sortDirection = true;
+      this.sortValue = value;
     }
+    this.fetchData();
   }
 
 
@@ -88,15 +71,14 @@ export class CustomersListComponent implements OnInit {
   }
 
   onElementPerPageChange(event: string) {
-    this.elementPerPage=+event;
-    this.pageNumber=0;
+    this.elementPerPage = +event;
+    this.pageNumber = 0;
     this.fetchData();
-    console.log("Element per page: "+event);
 
   }
-  onPageNumberChange(event:number){
-    this.pageNumber=event;
+
+  onPageNumberChange(event: number) {
+    this.pageNumber = event;
     this.fetchData();
-    console.log("Page Number : "+event);
   }
 }

@@ -9,9 +9,11 @@ import {CustomerPagination} from "../../../core/models/customer-pagination.model
 })
 export class CustomerService {
   host = environment.host;
-  constructor(private http:HttpClient) { }
 
-  public getCustomers(elementPerPage:number,pageNumber:number):Observable<CustomerPagination>{
-    return this.http.get<CustomerPagination>(this.host+"customers?page="+pageNumber+"&size="+elementPerPage);
+  constructor(private http: HttpClient) {
+  }
+
+  public getCustomers(elementPerPage: number, pageNumber: number, sortValue: string, sortDirection: String): Observable<CustomerPagination> {
+    return this.http.get<CustomerPagination>(this.host + "customers?page=" + pageNumber + "&size=" + elementPerPage + "&sortBy=" + sortValue + "&direction=" + sortDirection);
   }
 }

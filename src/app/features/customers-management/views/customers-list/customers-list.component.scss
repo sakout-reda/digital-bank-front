@@ -5,6 +5,10 @@ tbody tr:hover{
   background:#EDF1F7;
   cursor: pointer;
 }
+thead tr td:hover{
+  cursor: pointer;
+
+}
 tbody tr:nth-child(even){
   background: #F7F9FC;
 }

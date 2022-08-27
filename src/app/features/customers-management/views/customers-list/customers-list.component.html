@@ -20,11 +20,86 @@
         <table class="table">
           <thead>
           <tr class="bg-primary fw-bold text-light border border-primary">
-            <td (click)="sortBy('fullName')" class=" p-3 border border-end-white">Full Name</td>
-            <td (click)="sortBy('birthday')" class=" p-3 border border-end-white">Birthday</td>
-            <td (click)="sortBy('phoneNumber')" class=" p-3 border border-end-white">Phone Number</td>
-            <td (click)="sortBy('adress')" class=" p-3 border border-end-white">Adress</td>
-            <td (click)="sortBy('email')" class=" p-3 border border-end-white">E-mail</td>
+            <td (click)="sortBy('fullName')" class=" p-3 border border-end-white">
+              <div class="d-flex justify-content-between">
+                <div>
+                  Full Name
+                </div>
+                <div [ngClass]="(sortValue=='fullName')? 'text-white':'d-none'">
+                  <span *ngIf="sortDirection">
+                    <nb-icon icon="caret-up-fill"></nb-icon>
+                  </span>
+                  <span *ngIf="!sortDirection">
+                    <nb-icon icon="caret-down-fill"></nb-icon>
+                  </span>
+                </div>
+
+              </div>
+            </td>
+            <td (click)="sortBy('birthday')" class=" p-3 border border-end-white">
+              <div class="d-flex justify-content-between">
+                <div>
+                  Birthday
+                </div>
+                <div [ngClass]="(sortValue=='birthday')? 'text-white':'d-none'">
+                  <span *ngIf="sortDirection">
+                    <nb-icon icon="caret-up-fill"></nb-icon>
+                  </span>
+                  <span *ngIf="!sortDirection">
+                    <nb-icon icon="caret-down-fill"></nb-icon>
+                  </span>
+                </div>
+
+              </div>
+            </td>
+            <td (click)="sortBy('phoneNumber')" class=" p-3 border border-end-white">
+              <div class="d-flex justify-content-between">
+                <div>
+                  Phone Number
+                </div>
+                <div [ngClass]="(sortValue=='phoneNumber')? 'text-white':'d-none'">
+                  <span *ngIf="sortDirection">
+                    <nb-icon icon="caret-up-fill"></nb-icon>
+                  </span>
+                  <span *ngIf="!sortDirection">
+                    <nb-icon icon="caret-down-fill"></nb-icon>
+                  </span>
+                </div>
+
+              </div>
+            </td>
+            <td (click)="sortBy('adress')" class=" p-3 border border-end-white">
+              <div class="d-flex justify-content-between">
+                <div>
+                  Adress
+                </div>
+                <div [ngClass]="(sortValue=='adress')? 'text-white':'d-none'">
+                  <span *ngIf="sortDirection">
+                    <nb-icon icon="caret-up-fill"></nb-icon>
+                  </span>
+                  <span *ngIf="!sortDirection">
+                    <nb-icon icon="caret-down-fill"></nb-icon>
+                  </span>
+                </div>
+
+              </div>
+            </td>
+            <td (click)="sortBy('email')" class=" p-3 border border-end-white">
+              <div class="d-flex justify-content-between">
+                <div>
+                  E-mail
+                </div>
+                <div [ngClass]="(sortValue=='email')? 'text-white':'d-none'">
+                  <span *ngIf="sortDirection">
+                    <nb-icon icon="caret-up-fill"></nb-icon>
+                  </span>
+                  <span *ngIf="!sortDirection">
+                    <nb-icon icon="caret-down-fill"></nb-icon>
+                  </span>
+                </div>
+
+              </div>
+            </td>
             <td class=" p-3 border border-end-white">Actions</td>
           </tr>
           </thead>
@@ -100,7 +175,7 @@
               <button (click)="onPageNumberChange(result?.data!.number < 5 ? i : result?.data!.number-4+i)"
                       [ngClass]="pageNumber==(result?.data!.number < 5 ? i : result?.data!.number-4 + i) ?'text-light bg-primary' : 'text-primary'"
                       class="btn ">
-                {{(result?.data!.number <5 ? 1 + i : result?.data!.number - 3 + i)}}
+                {{(result?.data!.number < 5 ? 1 + i : result?.data!.number - 3 + i)}}
               </button>
             </span>
             <ng-template #printlastPages>
