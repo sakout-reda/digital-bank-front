@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerService} from "../../services/customer.service";
-import {catchError, debounce, debounceTime, fromEvent, map, Observable, of, startWith} from "rxjs";
+import {catchError, debounce, debounceTime, delay, fromEvent, map, Observable, of, startWith} from "rxjs";
 import {AppDataState, DataStateEnum} from "../../../../core/models/loading-state.model";
 import {NbGlobalPhysicalPosition, NbToastrService} from "@nebular/theme";
 import {CustomerPagination} from "../../../../core/models/customer-pagination.model";
+import {Customer} from "../../../../core/models/customer.model";
 
 @Component({
   selector: 'app-customers-list',
@@ -22,7 +23,7 @@ export class CustomersListComponent implements OnInit {
   sortValue: string = "";
   currenSearchValue: string = "";
   positions = NbGlobalPhysicalPosition;
-
+  firstEntry=true;
 
   constructor(private customerService: CustomerService, private toastrService: NbToastrService) {
   }
@@ -33,6 +34,8 @@ export class CustomersListComponent implements OnInit {
   }
 
   fetchData() {
+
+
     this.data$ = this.customerService.getCustomers(this.elementPerPage, this.pageNumber, this.sortValue, this.sortDirection ? 'ASC' : 'DESC').pipe(
       map(response => {
         return ({dataState: DataStateEnum.LOADED, data: response})
@@ -84,10 +87,14 @@ export class CustomersListComponent implements OnInit {
   }
 
   onSearch(value: string, event: any) {
-    (async () => {
-      await this.delay(1000);
-        console.log("Searching by :" + value + " Keyword : " + event.target.value);
-    })();
+    fromEvent(document,'keyup').pipe(
+      debounceTime(1000)).subscribe(()=>{
+        if(this.firstEntry){
+          console.log("Searching by :" + value + " Keyword : " + event.target.value);
+          this.firstEntry=false;
+        }
+    }
+   );
   }
 
   delay(ms: number) {

@@ -106,10 +106,10 @@
           <tbody>
           <tr>
             <td><input (keyup)="onSearch('fullName',$event)"class="form-control" placeholder="Full Name"></td>
-            <td><input class="form-control" placeholder="Birthday"></td>
-            <td><input class="form-control" placeholder="Phone Number"></td>
-            <td><input class="form-control" placeholder="Adress"></td>
-            <td><input class="form-control" placeholder="E-mail"></td>
+            <td><input (keyup)="onSearch('birthday',$event)"class="form-control" placeholder="Birthday"></td>
+            <td><input (keyup)="onSearch('phoneNumber',$event)"class="form-control" placeholder="Phone Number"></td>
+            <td><input (keyup)="onSearch('adress',$event)"class="form-control" placeholder="Adress"></td>
+            <td><input (keyup)="onSearch('email',$event)"class="form-control" placeholder="E-mail"></td>
             <td (click)="toggleAddForm()"><span class="btn btn-primary text-white w-100"><nb-icon
               icon="plus-lg"></nb-icon></span>
             </td>
