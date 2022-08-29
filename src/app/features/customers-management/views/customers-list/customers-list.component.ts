@@ -25,6 +25,7 @@ export class CustomersListComponent implements OnInit {
   positions = NbGlobalPhysicalPosition;
   firstEntry = true;
   searchFormGroup!: FormGroup;
+  AddCustomerFormGroup!: FormGroup;
 
   constructor(private customerService: CustomerService, private toastrService: NbToastrService,
               private fb: FormBuilder) {

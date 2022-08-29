@@ -26,7 +26,8 @@ export class CustomerService {
       "&fullName=" + searchFormGroup.controls['fullName'].value +
       "&adress=" + searchFormGroup.controls['adress'].value +
       "&email=" + searchFormGroup.controls['email'].value +
-      "&phoneNumber=" + searchFormGroup.controls['phoneNumber'].value);
+      "&phoneNumber=" + searchFormGroup.controls['phoneNumber'].value +
+      "&birthday=" + searchFormGroup.controls['birthday'].value);
 
     // "&fullName=" + searchFormGroup.controls['fullName'].value.toLowerCase() +
     // "&adress=" + searchFormGroup.controls['adress'].value.toLowerCase() +
