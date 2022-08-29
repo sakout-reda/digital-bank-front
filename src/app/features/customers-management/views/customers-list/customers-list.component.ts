@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerService} from "../../services/customer.service";
-import {catchError, debounceTime, fromEvent, map, Observable, of, startWith} from "rxjs";
+import {catchError, debounceTime, map, Observable, of, startWith} from "rxjs";
 import {AppDataState, DataStateEnum} from "../../../../core/models/loading-state.model";
 import {NbGlobalPhysicalPosition, NbToastrService} from "@nebular/theme";
 import {CustomerPagination} from "../../../../core/models/customer-pagination.model";
@@ -31,25 +31,25 @@ export class CustomersListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchData();
+    // this.fetchData();
     this.initSearchForm();
-
+    this.searchCustomerByKeyword();
   }
 
-  fetchData() {
-    this.data$ = this.customerService.getCustomers(this.elementPerPage, this.pageNumber, this.sortValue, this.sortDirection ? 'ASC' : 'DESC').pipe(
-      map(response => {
-        return ({dataState: DataStateEnum.LOADED, data: response})
-
-      }),
-      startWith({dataState: DataStateEnum.LOADING}),
-      catchError(err => of({
-        dataState: DataStateEnum.ERROR,
-        errorMessage: err.message,
-        this: this.showToast('Une erreur technique est survenue', "Erreur", "danger")
-      }))
-    );
-  }
+  // fetchData() {
+  //   this.data$ = this.customerService.getCustomers(this.elementPerPage, this.pageNumber, this.sortValue, this.sortDirection ? 'ASC' : 'DESC').pipe(
+  //     map(response => {
+  //       return ({dataState: DataStateEnum.LOADED, data: response})
+  //
+  //     }),
+  //     startWith({dataState: DataStateEnum.LOADING}),
+  //     catchError(err => of({
+  //       dataState: DataStateEnum.ERROR,
+  //       errorMessage: err.message,
+  //       this: this.showToast('Une erreur technique est survenue', "Erreur", "danger")
+  //     }))
+  //   );
+  // }
 
   searchCustomerByKeyword() {
     this.data$ = this.customerService.searchCustomer(this.elementPerPage, this.pageNumber, this.sortValue, this.sortDirection ? 'ASC' : 'DESC', this.searchFormGroup).pipe(
@@ -67,7 +67,6 @@ export class CustomersListComponent implements OnInit {
 
   toggleAddForm() {
     this.addFormActive = !this.addFormActive;
-    console.log("im working");
   }
 
   sortBy(value: string) {
@@ -77,7 +76,7 @@ export class CustomersListComponent implements OnInit {
       this.sortDirection = true;
       this.sortValue = value;
     }
-    this.fetchData();
+    this.searchCustomerByKeyword();
   }
 
 
@@ -92,13 +91,13 @@ export class CustomersListComponent implements OnInit {
   onElementPerPageChange(event: string) {
     this.elementPerPage = +event;
     this.pageNumber = 0;
-    this.fetchData();
+    this.searchCustomerByKeyword();
 
   }
 
   onPageNumberChange(event: number) {
     this.pageNumber = event;
-    this.fetchData();
+    this.searchCustomerByKeyword();
   }
 
   // onSearch(value: string, event: any) {

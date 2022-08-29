@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {CustomerPagination} from "../../../core/models/customer-pagination.model";
-import {Customer} from "../../../core/models/customer.model";
 import {FormGroup} from "@angular/forms";
 
 @Injectable({
@@ -15,9 +14,9 @@ export class CustomerService {
   constructor(private http: HttpClient) {
   }
 
-  public getCustomers(elementPerPage: number, pageNumber: number, sortValue: string, sortDirection: String): Observable<CustomerPagination> {
-    return this.http.get<CustomerPagination>(this.host + "customers?page=" + pageNumber + "&size=" + elementPerPage + "&sortBy=" + sortValue + "&direction=" + sortDirection);
-  }
+  // public getCustomers(elementPerPage: number, pageNumber: number, sortValue: string, sortDirection: String): Observable<CustomerPagination> {
+  //   return this.http.get<CustomerPagination>(this.host + "customers?page=" + pageNumber + "&size=" + elementPerPage + "&sortBy=" + sortValue + "&direction=" + sortDirection);
+  // }
 
   public searchCustomer(elementPerPage: number, pageNumber: number, sortValue: string, sortDirection: String, searchFormGroup: FormGroup): Observable<CustomerPagination> {
     return this.http.get<CustomerPagination>(this.host + "customers/search?page=" + pageNumber +
