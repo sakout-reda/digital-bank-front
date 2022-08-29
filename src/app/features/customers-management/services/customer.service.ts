@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {CustomerPagination} from "../../../core/models/customer-pagination.model";
 import {Customer} from "../../../core/models/customer.model";
+import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,21 @@ export class CustomerService {
 
   public getCustomers(elementPerPage: number, pageNumber: number, sortValue: string, sortDirection: String): Observable<CustomerPagination> {
     return this.http.get<CustomerPagination>(this.host + "customers?page=" + pageNumber + "&size=" + elementPerPage + "&sortBy=" + sortValue + "&direction=" + sortDirection);
-    // return this.http.get<CustomerPagination>(this.host + "customers?page=" + pageNumber + "&size=" + elementPerPage + "&sortBy=" + sortValue + "&direction=" + sortDirection
-    //   + "&fullName=" + customer.fullName + "&adress=" + customer.adress + "&email=" + customer.email + "&phoneNumber=" + customer.phoneNumber);
+  }
+
+  public searchCustomer(elementPerPage: number, pageNumber: number, sortValue: string, sortDirection: String, searchFormGroup: FormGroup): Observable<CustomerPagination> {
+    return this.http.get<CustomerPagination>(this.host + "customers/search?page=" + pageNumber +
+      "&size=" + elementPerPage +
+      "&sortBy=" + sortValue +
+      "&direction=" + sortDirection +
+      "&fullName=" + searchFormGroup.controls['fullName'].value +
+      "&adress=" + searchFormGroup.controls['adress'].value +
+      "&email=" + searchFormGroup.controls['email'].value +
+      "&phoneNumber=" + searchFormGroup.controls['phoneNumber'].value);
+
+    // "&fullName=" + searchFormGroup.controls['fullName'].value.toLowerCase() +
+    // "&adress=" + searchFormGroup.controls['adress'].value.toLowerCase() +
+    // "&email=" + searchFormGroup.controls['email'].value.toLowerCase() +
+    // "&phoneNumber=" + searchFormGroup.controls['phoneNumber'].value.toLowerCase());
   }
 }

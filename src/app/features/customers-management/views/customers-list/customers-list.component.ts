@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerService} from "../../services/customer.service";
-import {catchError, debounce, debounceTime, delay, fromEvent, map, Observable, of, startWith} from "rxjs";
+import {catchError, debounceTime, fromEvent, map, Observable, of, startWith} from "rxjs";
 import {AppDataState, DataStateEnum} from "../../../../core/models/loading-state.model";
 import {NbGlobalPhysicalPosition, NbToastrService} from "@nebular/theme";
 import {CustomerPagination} from "../../../../core/models/customer-pagination.model";
-import {Customer} from "../../../../core/models/customer.model";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-customers-list',
@@ -23,23 +23,38 @@ export class CustomersListComponent implements OnInit {
   sortValue: string = "";
   currenSearchValue: string = "";
   positions = NbGlobalPhysicalPosition;
-  firstEntry=true;
+  firstEntry = true;
+  searchFormGroup!: FormGroup;
 
-  constructor(private customerService: CustomerService, private toastrService: NbToastrService) {
+  constructor(private customerService: CustomerService, private toastrService: NbToastrService,
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.fetchData();
+    this.initSearchForm();
 
   }
 
   fetchData() {
-
-
     this.data$ = this.customerService.getCustomers(this.elementPerPage, this.pageNumber, this.sortValue, this.sortDirection ? 'ASC' : 'DESC').pipe(
       map(response => {
         return ({dataState: DataStateEnum.LOADED, data: response})
 
+      }),
+      startWith({dataState: DataStateEnum.LOADING}),
+      catchError(err => of({
+        dataState: DataStateEnum.ERROR,
+        errorMessage: err.message,
+        this: this.showToast('Une erreur technique est survenue', "Erreur", "danger")
+      }))
+    );
+  }
+
+  searchCustomerByKeyword() {
+    this.data$ = this.customerService.searchCustomer(this.elementPerPage, this.pageNumber, this.sortValue, this.sortDirection ? 'ASC' : 'DESC', this.searchFormGroup).pipe(
+      map(response => {
+        return ({dataState: DataStateEnum.LOADED, data: response})
       }),
       startWith({dataState: DataStateEnum.LOADING}),
       catchError(err => of({
@@ -86,18 +101,24 @@ export class CustomersListComponent implements OnInit {
     this.fetchData();
   }
 
-  onSearch(value: string, event: any) {
-    fromEvent(document,'keyup').pipe(
-      debounceTime(1000)).subscribe(()=>{
-        if(this.firstEntry){
-          console.log("Searching by :" + value + " Keyword : " + event.target.value);
-          this.firstEntry=false;
-        }
-    }
-   );
+  // onSearch(value: string, event: any) {
+  onSearch() {
+    this.searchFormGroup.valueChanges.pipe(
+      debounceTime(1000)).subscribe(() => {
+        this.searchCustomerByKeyword();
+      }
+    );
+
   }
 
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  initSearchForm() {
+    this.searchFormGroup = this.fb.group({
+      fullName: this.fb.control(""),
+      birthday: this.fb.control(""),
+      phoneNumber: this.fb.control(""),
+      adress: this.fb.control(""),
+      email: this.fb.control(""),
+    });
+    this.onSearch();
   }
 }

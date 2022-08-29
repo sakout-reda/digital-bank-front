@@ -17,6 +17,9 @@
         </div>
       </nb-card-header>
       <nb-card-body>
+        <div *ngIf="searchFormGroup">
+          {{searchFormGroup.value|json}}
+        </div>
         <table class="table">
           <thead>
           <tr class="bg-primary fw-bold text-light border border-primary">
@@ -103,17 +106,57 @@
             <td class=" p-3 border border-end-white">Actions</td>
           </tr>
           </thead>
+
           <tbody>
+
           <tr>
-            <td><input (keyup)="onSearch('fullName',$event)"class="form-control" placeholder="Full Name"></td>
-            <td><input (keyup)="onSearch('birthday',$event)"class="form-control" placeholder="Birthday"></td>
-            <td><input (keyup)="onSearch('phoneNumber',$event)"class="form-control" placeholder="Phone Number"></td>
-            <td><input (keyup)="onSearch('adress',$event)"class="form-control" placeholder="Adress"></td>
-            <td><input (keyup)="onSearch('email',$event)"class="form-control" placeholder="E-mail"></td>
+            <td>
+              <form [formGroup]="searchFormGroup">
+                <input
+                  formControlName="fullName"
+                  class="form-control"
+                  placeholder="Full Name"
+                  (keyup)="onSearch()"
+                >
+              </form>
+            </td>
+            <td>
+              <form [formGroup]="searchFormGroup">
+                <input
+                  formControlName="birthday"
+                  class="form-control"
+                  placeholder="Birthday">
+              </form>
+            </td>
+            <td>
+              <form [formGroup]="searchFormGroup">
+                <input
+                  formControlName="phoneNumber"
+                  class="form-control"
+                  placeholder="Phone Number">
+              </form>
+            </td>
+            <td>
+              <form [formGroup]="searchFormGroup">
+                <input
+                  formControlName="adress"
+                  class="form-control"
+                  placeholder="Adress">
+              </form>
+            </td>
+            <td>
+              <form [formGroup]="searchFormGroup">
+                <input
+                  formControlName="email"
+                  class="form-control"
+                  placeholder="E-mail">
+              </form>
+            </td>
             <td (click)="toggleAddForm()"><span class="btn btn-primary text-white w-100"><nb-icon
               icon="plus-lg"></nb-icon></span>
             </td>
           </tr>
+
           <tr [ngClass]="{'d-none':addFormActive}">
             <td><input class="form-control" placeholder="Full Name"></td>
             <td><input class="form-control" placeholder="Birthday"></td>

@@ -11,6 +11,7 @@ import {ViewsModule} from "./views/views.module";
 import {FeaturesModule} from "./features/features.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
+import {ReactiveFormsModule} from "@angular/forms";
 @NgModule({
   declarations: [
     AppComponent
@@ -20,6 +21,7 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     NbThemeModule.forRoot({ name: 'corporate' }),
     NbLayoutModule,
     NbSidebarModule.forRoot(),

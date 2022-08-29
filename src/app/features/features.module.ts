@@ -4,6 +4,7 @@ import {CustomersListComponent} from "./customers-management/views/customers-lis
 import {NbCardModule, NbIconModule, NbSelectModule, NbToastrModule} from "@nebular/theme";
 import {CommonModule} from "@angular/common";
 import {LayoutModule} from "../layout/layout.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {LayoutModule} from "../layout/layout.module";
     CommonModule,
     NbToastrModule.forRoot(),
     LayoutModule,
+    ReactiveFormsModule,
   ],
   providers: [],
 })
