@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {CustomerPagination} from "../../../core/models/customer-pagination.model";
 import {FormGroup} from "@angular/forms";
+import {Customer} from "../../../core/models/customer.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,9 @@ export class CustomerService {
   constructor(private http: HttpClient) {
   }
 
-  // public getCustomers(elementPerPage: number, pageNumber: number, sortValue: string, sortDirection: String): Observable<CustomerPagination> {
-  //   return this.http.get<CustomerPagination>(this.host + "customers?page=" + pageNumber + "&size=" + elementPerPage + "&sortBy=" + sortValue + "&direction=" + sortDirection);
-  // }
+  public getCustomer(id:number): Observable<Customer> {
+    return this.http.get<Customer>(this.host + "customers/" + id);
+  }
 
   public searchCustomer(elementPerPage: number, pageNumber: number, sortValue: string, sortDirection: String, searchFormGroup: FormGroup): Observable<CustomerPagination> {
     return this.http.get<CustomerPagination>(this.host + "customers/search?page=" + pageNumber +

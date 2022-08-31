@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {CustomerService} from "../../services/customer.service";
 import {catchError, debounceTime, map, Observable, of, startWith} from "rxjs";
 import {AppDataState, DataStateEnum} from "../../../../core/models/loading-state.model";
-import {NbGlobalPhysicalPosition, NbToastrService} from "@nebular/theme";
+import {NbDialogRef, NbDialogService, NbGlobalPhysicalPosition, NbToastrService} from "@nebular/theme";
 import {CustomerPagination} from "../../../../core/models/customer-pagination.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {AddEditCustomerComponent} from "../add-edit-customer/add-edit-customer.component";
 
 @Component({
   selector: 'app-customers-list',
@@ -15,7 +16,7 @@ export class CustomersListComponent implements OnInit {
   data$: Observable<AppDataState<CustomerPagination>> | undefined;
   errorMessage!: string;
   readonly DataStateEnum = DataStateEnum;
-  addFormActive = true;
+  // addFormActive = true;
   elementPerPage = 10;
   pageNumber = 0;
   sortDirection = true;
@@ -28,7 +29,7 @@ export class CustomersListComponent implements OnInit {
   AddCustomerFormGroup!: FormGroup;
 
   constructor(private customerService: CustomerService, private toastrService: NbToastrService,
-              private fb: FormBuilder) {
+              private fb: FormBuilder, private dialogService: NbDialogService) {
   }
 
   ngOnInit(): void {
@@ -66,9 +67,9 @@ export class CustomersListComponent implements OnInit {
     );
   }
 
-  toggleAddForm() {
-    this.addFormActive = !this.addFormActive;
-  }
+  // toggleAddForm() {
+  //   this.addFormActive = !this.addFormActive;
+  // }
 
   sortBy(value: string) {
     if (this.sortValue == value.toString()) {
@@ -120,5 +121,13 @@ export class CustomersListComponent implements OnInit {
       email: this.fb.control(""),
     });
     this.onSearch();
+  }
+
+  onAddEditCustomer(id?: number) {
+    this.dialogService.open(AddEditCustomerComponent, {
+      context: {
+        id: id,
+      },
+    });
   }
 }

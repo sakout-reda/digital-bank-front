@@ -1,15 +1,24 @@
 import {NgModule, Optional, SkipSelf} from "@angular/core";
 import {AccountsComponent} from './accounts-management/accounts.component';
 import {CustomersListComponent} from "./customers-management/views/customers-list/customers-list.component";
-import {NbCardModule, NbIconModule, NbSelectModule, NbToastrModule} from "@nebular/theme";
+import {
+  NbCardModule,
+  NbDatepickerModule,
+  NbDialogModule,
+  NbIconModule,
+  NbSelectModule,
+  NbToastrModule
+} from "@nebular/theme";
 import {CommonModule} from "@angular/common";
 import {LayoutModule} from "../layout/layout.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import { AddEditCustomerComponent } from './customers-management/views/add-edit-customer/add-edit-customer.component';
 
 @NgModule({
   declarations: [
     AccountsComponent,
-    CustomersListComponent
+    CustomersListComponent,
+    AddEditCustomerComponent
   ],
   imports: [
     NbCardModule,
@@ -17,8 +26,10 @@ import {ReactiveFormsModule} from "@angular/forms";
     NbIconModule,
     CommonModule,
     NbToastrModule.forRoot(),
+    NbDialogModule.forRoot(),
     LayoutModule,
     ReactiveFormsModule,
+    NbDatepickerModule.forRoot(),
   ],
   providers: [],
 })

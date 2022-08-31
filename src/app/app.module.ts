@@ -12,6 +12,7 @@ import {FeaturesModule} from "./features/features.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import {NbDateFnsDateModule} from "@nebular/date-fns";
 @NgModule({
   declarations: [
     AppComponent
@@ -30,7 +31,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     LayoutModule,
     SharedModule,
     ViewsModule,
-    FeaturesModule
+    FeaturesModule,
+    NbDateFnsDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

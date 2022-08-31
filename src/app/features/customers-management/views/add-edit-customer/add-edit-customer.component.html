@@ -1,0 +1,85 @@
+<ng-container *ngIf="(data$ | async) as result" [ngSwitch]="result.dataState">
+  <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+    <DB-loading></DB-loading>
+  </ng-container>
+  <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+
+    <nb-card style="width:700px;">
+      <nb-card-header>
+        <span *ngIf="id"> Edit Customer</span>
+        <span *ngIf="!id">Add Customer</span>
+      </nb-card-header>
+      <nb-card-body class="container">
+
+        <form [formGroup]="customerFormGroup">
+          <div class="row mb-3">
+            <div class="d-flex flex-row justify-content-center ">
+              <div class="col-3">
+                <label for="fullName" class="fw-bold col-form-label col-form-label-sm">Full Name : </label>
+              </div>
+              <div class=" col-6">
+                <input formControlName="fullName" [value]="result?.data?.fullName" type="text" class="form-control form-control-sm" id="fullName">
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="d-flex flex-row justify-content-center ">
+              <div class="col-3">
+                <label for="birthday" class="fw-bold col-form-label col-form-label-sm">Birthday : </label>
+              </div>
+              <div class=" col-6">
+                <input [value]="result?.data?.birthday | date: 'dd/MM/yyyy'" type="date " class="form-control form-control-sm" id="birthday"
+                       [nbDatepicker]="datepicker">
+                <nb-datepicker #datepicker format="dd/MM/yyyy"></nb-datepicker>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="d-flex flex-row justify-content-center ">
+              <div class="col-3">
+                <label for="phoneNumber" class="fw-bold col-form-label col-form-label-sm">Phone Number : </label>
+              </div>
+              <div class=" col-6">
+                <input [value]="result.data?.phoneNumber" type="text" class="form-control form-control-sm"
+                       id="phoneNumber">
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="d-flex flex-row justify-content-center ">
+              <div class="col-3">
+                <label for="adress" class="fw-bold col-form-label col-form-label-sm">Adress : </label>
+              </div>
+              <div class=" col-6">
+                <input [value]="result.data?.adress" type="text" class="form-control form-control-sm" id="adress">
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="d-flex flex-row justify-content-center ">
+              <div class="col-3">
+                <label for="email" class="fw-bold col-form-label col-form-label-sm">Email : </label>
+              </div>
+              <div class=" col-6">
+                <input [value]="result.data?.email" type="email" class="form-control form-control-sm" id="email">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-11 mb-5 d-flex flex-row justify-content-end">
+              <button type="button" class="btn btn-sm border border-danger text-danger">Quitter</button>
+              <button (click)="onSaveCustomer()" type="button" class=" mx-4 btn px-4 btn-sm bg-primary text-white">
+                <span *ngIf="id"> EDIT</span>
+                <span *ngIf="!id">ADD</span>
+              </button>
+
+            </div>
+          </div>
+
+        </form>
+      </nb-card-body>
+    </nb-card>
+
+  </ng-container>
+</ng-container>

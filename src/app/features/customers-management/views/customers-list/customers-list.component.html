@@ -17,7 +17,7 @@
         </div>
       </nb-card-header>
       <nb-card-body>
-        <table class="table">
+        <table class="table" aria-describedby="mydesc">
           <thead>
           <tr class="bg-primary fw-bold text-light border border-primary">
             <td (click)="sortBy('fullName')" class=" p-3 border border-end-white">
@@ -149,29 +149,34 @@
                   placeholder="E-mail">
               </form>
             </td>
-            <td (click)="toggleAddForm()"><span class="btn btn-primary text-white w-100"><nb-icon
+            <td (click)="onAddEditCustomer()"><span class="btn btn-primary text-white w-100"><nb-icon
               icon="plus-lg"></nb-icon></span>
             </td>
           </tr>
 
-          <tr [ngClass]="{'d-none':addFormActive}">
-            <td><input class="form-control" placeholder="Full Name"></td>
-            <td><input class="form-control" placeholder="Birthday"></td>
-            <td><input class="form-control" placeholder="Phone Number"></td>
-            <td><input class="form-control" placeholder="Adress"></td>
-            <td><input class="form-control" placeholder="E-mail"></td>
-            <td>
-              <div class="d-flex flex-row justify-content-around m-auto">
-                <div id="validateIcon">
-                  <nb-icon icon="check-lg"></nb-icon>
-                </div>
-                <div class="verticalLign"></div>
-                <div id="cancelIcon">
-                  <nb-icon (click)="toggleAddForm()" icon="x"></nb-icon>
-                </div>
-              </div>
-            </td>
-          </tr>
+
+<!--          INLINE ADD FORM-->
+
+<!--          <tr [ngClass]="{'d-none':addFormActive}">-->
+<!--            <td><input class="form-control" placeholder="Full Name"></td>-->
+<!--            <td><input class="form-control" placeholder="Birthday"></td>-->
+<!--            <td><input class="form-control" placeholder="Phone Number"></td>-->
+<!--            <td><input class="form-control" placeholder="Adress"></td>-->
+<!--            <td><input class="form-control" placeholder="E-mail"></td>-->
+<!--            <td>-->
+<!--              <div class="d-flex flex-row justify-content-around m-auto">-->
+<!--                <div id="validateIcon">-->
+<!--                  <nb-icon icon="check-lg"></nb-icon>-->
+<!--                </div>-->
+<!--                <div class="verticalLign"></div>-->
+<!--                <div id="cancelIcon">-->
+<!--                  <nb-icon (click)="toggleAddForm()" icon="x"></nb-icon>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--          </tr>-->
+
+          <!--          INLINE ADD FORM-->
           <tr *ngFor="let c of result?.data?.content" class="text-truncate">
             <td class="px-4">{{c.fullName}}</td>
             <td class="px-4">{{c.birthday |date:'dd/MM/yyyy'}}</td>
@@ -180,7 +185,7 @@
             <td class="px-4">{{c.email}}</td>
             <td>
               <div class="d-flex flex-row justify-content-around">
-                <div class="editIcon">
+                <div (click)="onAddEditCustomer(c.id)" class="editIcon">
                   <nb-icon icon="pencil"></nb-icon>
                 </div>
                 <div class="verticalLign"></div>
