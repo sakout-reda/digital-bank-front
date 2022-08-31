@@ -35,4 +35,8 @@ export class CustomerService {
     // "&email=" + searchFormGroup.controls['email'].value.toLowerCase() +
     // "&phoneNumber=" + searchFormGroup.controls['phoneNumber'].value.toLowerCase());
   }
+
+  public saveCustomer(customer:Customer): Observable<Customer> {
+    return this.http.post<Customer>(this.host + "customers/", customer);
+  }
 }

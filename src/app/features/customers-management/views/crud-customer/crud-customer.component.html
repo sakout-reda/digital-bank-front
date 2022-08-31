@@ -1,8 +1,9 @@
 <nb-card style="width:700px;">
   <nb-card-header>
-    <span *ngIf="id && !viewMode"> Edit Customer</span>
     <span *ngIf="!id">Add Customer</span>
-    <span *ngIf="id && viewMode">Customer Details</span>
+    <span *ngIf="id && !viewMode"> Edit Customer</span>
+    <span *ngIf="id && viewMode && !delete">Customer Details</span>
+    <span *ngIf="id && viewMode && delete">Êtes-vous sûr de vouloir supprimer cet utilisateur ?</span>
   </nb-card-header>
   <nb-card-body class="container">
 
@@ -109,7 +110,15 @@
           <button (click)="onSubmit()" type="submit" class=" mx-4 btn px-4 btn-sm bg-primary text-white">
             Enregistrer
           </button>
+        </div>
+      </div>
 
+      <div *ngIf="delete" class="row">
+        <div class="col-11 mb-5 d-flex flex-row justify-content-end">
+          <button type="push" class="btn btn-sm border border-danger text-danger">Quitter</button>
+          <button (click)="onDelete()" type="submit" class=" mx-4 btn px-4 btn-sm bg-danger text-white">
+            Confirmer
+          </button>
         </div>
       </div>
 

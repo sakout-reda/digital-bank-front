@@ -149,7 +149,7 @@
                   placeholder="E-mail">
               </form>
             </td>
-            <td colspan="2" (click)="onAddEditCustomer(false)"><span class="btn btn-primary text-white w-100"><nb-icon
+            <td colspan="2" (click)="onCrudCustomer(false)"><span class="btn btn-primary text-white w-100"><nb-icon
               icon="plus-lg"></nb-icon></span>
             </td>
           </tr>
@@ -178,15 +178,15 @@
 
           <!--          INLINE ADD FORM-->
           <tr *ngFor="let c of result?.data?.content" class="text-truncate">
-            <td (click)="onAddEditCustomer(true,c.id)" class="px-4">{{c.fullName}}</td>
-            <td (click)="onAddEditCustomer(true,c.id)" class="px-4">{{c.birthday |date:'dd/MM/yyyy'}}</td>
-            <td (click)="onAddEditCustomer(true,c.id)" class="px-4">{{c.phoneNumber}}</td>
-            <td (click)="onAddEditCustomer(true,c.id)" class="px-4">{{c.adress}}</td>
-            <td (click)="onAddEditCustomer(true,c.id)" class="px-4">{{c.email}}</td>
-            <td (click)="onAddEditCustomer(false,c.id)" class="editIcon text-center">
+            <td (click)="onCrudCustomer(true,c.id)" class="px-4">{{c.fullName}}</td>
+            <td (click)="onCrudCustomer(true,c.id)" class="px-4">{{c.birthday |date:'dd/MM/yyyy'}}</td>
+            <td (click)="onCrudCustomer(true,c.id)" class="px-4">{{c.phoneNumber}}</td>
+            <td (click)="onCrudCustomer(true,c.id)" class="px-4">{{c.adress}}</td>
+            <td (click)="onCrudCustomer(true,c.id)" class="px-4">{{c.email}}</td>
+            <td (click)="onCrudCustomer(false,c.id)" class="editIcon text-center">
               <nb-icon icon="pencil"></nb-icon>
             </td>
-            <td class="deleteIcon text-center">
+            <td (click)="onCrudCustomer(true,c.id, true)"class="deleteIcon text-center">
               <nb-icon icon="trash3"></nb-icon>
             </td>
           </tr>

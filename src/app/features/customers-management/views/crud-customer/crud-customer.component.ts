@@ -8,15 +8,17 @@ import {NbToastrService} from "@nebular/theme";
 
 @Component({
   selector: 'DB-add-edit-customer',
-  templateUrl: './add-edit-customer.component.html',
-  styleUrls: ['./add-edit-customer.component.scss']
+  templateUrl: './crud-customer.component.html',
+  styleUrls: ['./crud-customer.component.scss']
 })
-export class AddEditCustomerComponent implements OnInit {
+export class CrudCustomerComponent implements OnInit {
 
   @Input()
   id!: number;
   @Input()
   viewMode!: boolean;
+  @Input()
+  delete!: boolean;
 
   data$: Observable<AppDataState<Customer>> | undefined;
   customerFormGroup!: FormGroup;
@@ -28,7 +30,6 @@ export class AddEditCustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCustomerFormGroup();
-    console.log(this.viewMode);
   }
 
   initCustomerFormGroup() {
@@ -62,16 +63,40 @@ export class AddEditCustomerComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.customerFormGroup.invalid || this.customerFormGroup.errors) {
-      this.showToast('Formulaire invalid', 'Erreur', 'danger')
-    }
-
-    if (this.id) {
-      console.log("Updating User");
-    } else {
-      console.log("New User");
+    if (!this.customerFormGroup.valid) {
+      this.onCustomerInvalid();
+    } else if (this.id && this.customerFormGroup.valid) {
+      this.onUpdateCustomer();
+    } else if (!this.id && this.customerFormGroup.valid) {
+      this.onAddCustomer();
     }
   }
+
+  onCustomerInvalid() {
+    this.showToast('Formulaire invalid', 'Erreur', 'danger');
+  }
+
+  onAddCustomer() {
+    let customer:Customer=this.customerFormGroup.value;
+    this.customerService.saveCustomer(customer).subscribe({
+      next: data=>{
+        this.showToast('Customer Added', 'Success', 'success');
+      },
+      error: err =>{
+        this.showToast('Une erreur est survenu', 'Erreur', 'danger');
+      }
+    });
+  }
+
+  onUpdateCustomer() {
+    this.showToast('Customer updated', 'Success', 'success');
+  }
+
+  onDelete() {
+    this.showToast('Customer Deleted', 'Success', 'success');
+
+  }
+
 
 }
 

@@ -12,14 +12,14 @@ import {
 import {CommonModule} from "@angular/common";
 import {LayoutModule} from "../layout/layout.module";
 import {ReactiveFormsModule} from "@angular/forms";
-import { AddEditCustomerComponent } from './customers-management/views/add-edit-customer/add-edit-customer.component';
+import { CrudCustomerComponent } from './customers-management/views/crud-customer/crud-customer.component';
 import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
     AccountsComponent,
     CustomersListComponent,
-    AddEditCustomerComponent
+    CrudCustomerComponent
   ],
   imports: [
     NbCardModule,

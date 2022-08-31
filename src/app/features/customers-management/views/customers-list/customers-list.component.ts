@@ -5,7 +5,7 @@ import {AppDataState, DataStateEnum} from "../../../../core/models/loading-state
 import {NbDialogService, NbGlobalPhysicalPosition, NbToastrService} from "@nebular/theme";
 import {CustomerPagination} from "../../../../core/models/customer-pagination.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {AddEditCustomerComponent} from "../add-edit-customer/add-edit-customer.component";
+import {CrudCustomerComponent} from "../crud-customer/crud-customer.component";
 
 @Component({
   selector: 'app-customers-list',
@@ -123,11 +123,12 @@ export class CustomersListComponent implements OnInit {
     this.onSearch();
   }
 
-  onAddEditCustomer(viewMode:boolean, id?: number) {
-    this.dialogService.open(AddEditCustomerComponent, {
+  onCrudCustomer(viewMode: boolean, id?: number, deleteMode?:boolean) {
+    this.dialogService.open(CrudCustomerComponent, {
       context: {
-        viewMode:viewMode,
+        viewMode: viewMode,
         id: id,
+        delete:deleteMode
       },
     });
   }
