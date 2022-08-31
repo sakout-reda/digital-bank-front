@@ -16,7 +16,7 @@ export class AddEditCustomerComponent implements OnInit {
   @Input()
   id!: number;
   @Input()
-  viewMode!:boolean;
+  viewMode!: boolean;
 
   data$: Observable<AppDataState<Customer>> | undefined;
   customerFormGroup!: FormGroup;
@@ -34,23 +34,23 @@ export class AddEditCustomerComponent implements OnInit {
   initCustomerFormGroup() {
 
     this.customerFormGroup = this.fb.group({
-      fullName:['',Validators.required],
-      birthday: ['',Validators.required],
-      phoneNumber: ['',Validators.required],
-      adress: ['',Validators.required],
-      email: ['',Validators.required],
+      fullName: [{value: '', disabled: this.viewMode}, Validators.required],
+      birthday: [{value: '', disabled: this.viewMode}, Validators.required],
+      phoneNumber: [{value: '', disabled: this.viewMode}, Validators.required],
+      adress: [{value: '', disabled: this.viewMode}, Validators.required],
+      email: [{value: '', disabled: this.viewMode}, Validators.required],
     })
 
     if (this.id) {
       this.customerService.getCustomer(this.id)
-        .pipe(first()).subscribe(c =>{
-          c.birthday = new Date(c.birthday);
-          this.customerFormGroup.patchValue(c);
+        .pipe(first()).subscribe(c => {
+        c.birthday = new Date(c.birthday);
+        this.customerFormGroup.patchValue(c);
       });
     }
   }
 
-  get c(){
+  get c() {
     return this.customerFormGroup.controls;
   }
 
@@ -63,7 +63,7 @@ export class AddEditCustomerComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.customerFormGroup.invalid || this.customerFormGroup.errors) {
-      this.showToast('Formulaire invalid','Erreur','danger')
+      this.showToast('Formulaire invalid', 'Erreur', 'danger')
     }
 
     if (this.id) {
