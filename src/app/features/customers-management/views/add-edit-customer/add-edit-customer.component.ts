@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomerService} from "../../services/customer.service";
-import {catchError, map, Observable, of, startWith} from "rxjs";
-import {AppDataState, DataStateEnum} from "../../../../core/models/loading-state.model";
+import {first, Observable} from "rxjs";
+import {AppDataState} from "../../../../core/models/loading-state.model";
 import {Customer} from "../../../../core/models/customer.model";
 import {NbToastrService} from "@nebular/theme";
 
@@ -15,54 +15,62 @@ export class AddEditCustomerComponent implements OnInit {
 
   @Input()
   id!: number;
+  @Input()
+  viewMode!:boolean;
+
   data$: Observable<AppDataState<Customer>> | undefined;
   customerFormGroup!: FormGroup;
-  readonly DataStateEnum = DataStateEnum;
+  submitted = false;
 
-  constructor(private customerService: CustomerService, private fb:FormBuilder,
-              private toastrService: NbToastrService) {}
+  constructor(private customerService: CustomerService, private fb: FormBuilder,
+              private toastrService: NbToastrService) {
+  }
 
   ngOnInit(): void {
     this.initCustomerFormGroup();
+    console.log(this.viewMode);
   }
 
   initCustomerFormGroup() {
 
-    if(this.id){
-      this.fetchUserById();
-    }
-    else{
-      this.initCustomerForm();
-    }
-
-  }
-
-  fetchUserById() {
-
-    this.data$ = this.customerService.getCustomer(this.id).pipe(
-      map(response => {
-        return ({dataState: DataStateEnum.LOADED, data: response})
-      }),
-      startWith({dataState: DataStateEnum.LOADING}),
-      catchError(err => of({
-        dataState: DataStateEnum.ERROR,
-        errorMessage: err.message,
-        this: this.showToast('Une erreur technique est survenue', "Erreur", "danger")
-      }))
-    );
-  }
-
-  initCustomerForm(){
     this.customerFormGroup = this.fb.group({
-      fullName: this.fb.control(""),
-    });
+      fullName:['',Validators.required],
+      birthday: ['',Validators.required],
+      phoneNumber: ['',Validators.required],
+      adress: ['',Validators.required],
+      email: ['',Validators.required],
+    })
+
+    if (this.id) {
+      this.customerService.getCustomer(this.id)
+        .pipe(first()).subscribe(c =>{
+          c.birthday = new Date(c.birthday);
+          this.customerFormGroup.patchValue(c);
+      });
+    }
+  }
+
+  get c(){
+    return this.customerFormGroup.controls;
   }
 
   showToast(message: string, title: string, status: string) {
-    return this.toastrService.show(message, title, {status, duration: 0});
+    return this.toastrService.show(message, title, {status});
   }
-  onSaveCustomer(){
 
+  onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.customerFormGroup.invalid || this.customerFormGroup.errors) {
+      this.showToast('Formulaire invalid','Erreur','danger')
+    }
+
+    if (this.id) {
+      console.log("Updating User");
+    } else {
+      console.log("New User");
+    }
   }
 
 }

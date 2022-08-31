@@ -100,7 +100,7 @@
 
               </div>
             </td>
-            <td class=" p-3 border border-end-white">Actions</td>
+            <td colspan="2" class=" p-3 border border-end-white">Actions</td>
           </tr>
           </thead>
 
@@ -149,50 +149,45 @@
                   placeholder="E-mail">
               </form>
             </td>
-            <td (click)="onAddEditCustomer()"><span class="btn btn-primary text-white w-100"><nb-icon
+            <td colspan="2" (click)="onAddEditCustomer(false)"><span class="btn btn-primary text-white w-100"><nb-icon
               icon="plus-lg"></nb-icon></span>
             </td>
           </tr>
 
 
-<!--          INLINE ADD FORM-->
+          <!--          INLINE ADD FORM-->
 
-<!--          <tr [ngClass]="{'d-none':addFormActive}">-->
-<!--            <td><input class="form-control" placeholder="Full Name"></td>-->
-<!--            <td><input class="form-control" placeholder="Birthday"></td>-->
-<!--            <td><input class="form-control" placeholder="Phone Number"></td>-->
-<!--            <td><input class="form-control" placeholder="Adress"></td>-->
-<!--            <td><input class="form-control" placeholder="E-mail"></td>-->
-<!--            <td>-->
-<!--              <div class="d-flex flex-row justify-content-around m-auto">-->
-<!--                <div id="validateIcon">-->
-<!--                  <nb-icon icon="check-lg"></nb-icon>-->
-<!--                </div>-->
-<!--                <div class="verticalLign"></div>-->
-<!--                <div id="cancelIcon">-->
-<!--                  <nb-icon (click)="toggleAddForm()" icon="x"></nb-icon>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </td>-->
-<!--          </tr>-->
+          <!--          <tr [ngClass]="{'d-none':addFormActive}">-->
+          <!--            <td><input class="form-control" placeholder="Full Name"></td>-->
+          <!--            <td><input class="form-control" placeholder="Birthday"></td>-->
+          <!--            <td><input class="form-control" placeholder="Phone Number"></td>-->
+          <!--            <td><input class="form-control" placeholder="Adress"></td>-->
+          <!--            <td><input class="form-control" placeholder="E-mail"></td>-->
+          <!--            <td>-->
+          <!--              <div class="d-flex flex-row justify-content-around m-auto">-->
+          <!--                <div id="validateIcon">-->
+          <!--                  <nb-icon icon="check-lg"></nb-icon>-->
+          <!--                </div>-->
+          <!--                <div class="verticalLign"></div>-->
+          <!--                <div id="cancelIcon">-->
+          <!--                  <nb-icon (click)="toggleAddForm()" icon="x"></nb-icon>-->
+          <!--                </div>-->
+          <!--              </div>-->
+          <!--            </td>-->
+          <!--          </tr>-->
 
           <!--          INLINE ADD FORM-->
           <tr *ngFor="let c of result?.data?.content" class="text-truncate">
-            <td class="px-4">{{c.fullName}}</td>
-            <td class="px-4">{{c.birthday |date:'dd/MM/yyyy'}}</td>
-            <td class="px-4">{{c.phoneNumber}}</td>
-            <td class="px-4">{{c.adress}}</td>
-            <td class="px-4">{{c.email}}</td>
-            <td>
-              <div class="d-flex flex-row justify-content-around">
-                <div (click)="onAddEditCustomer(c.id)" class="editIcon">
-                  <nb-icon icon="pencil"></nb-icon>
-                </div>
-                <div class="verticalLign"></div>
-                <div class="deleteIcon">
-                  <nb-icon icon="trash3"></nb-icon>
-                </div>
-              </div>
+            <td (click)="onAddEditCustomer(true,c.id)" class="px-4">{{c.fullName}}</td>
+            <td (click)="onAddEditCustomer(true,c.id)" class="px-4">{{c.birthday |date:'dd/MM/yyyy'}}</td>
+            <td (click)="onAddEditCustomer(true,c.id)" class="px-4">{{c.phoneNumber}}</td>
+            <td (click)="onAddEditCustomer(true,c.id)" class="px-4">{{c.adress}}</td>
+            <td (click)="onAddEditCustomer(true,c.id)" class="px-4">{{c.email}}</td>
+            <td (click)="onAddEditCustomer(false,c.id)" class="editIcon text-center">
+              <nb-icon icon="pencil"></nb-icon>
+            </td>
+            <td class="deleteIcon text-center">
+              <nb-icon icon="trash3"></nb-icon>
             </td>
           </tr>
           </tbody>

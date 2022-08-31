@@ -13,6 +13,7 @@ import {CommonModule} from "@angular/common";
 import {LayoutModule} from "../layout/layout.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import { AddEditCustomerComponent } from './customers-management/views/add-edit-customer/add-edit-customer.component';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AddEditCustomerComponent } from './customers-management/views/add-edit-
     LayoutModule,
     ReactiveFormsModule,
     NbDatepickerModule.forRoot(),
+    RouterModule,
   ],
   providers: [],
 })

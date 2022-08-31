@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CustomerService} from "../../services/customer.service";
 import {catchError, debounceTime, map, Observable, of, startWith} from "rxjs";
 import {AppDataState, DataStateEnum} from "../../../../core/models/loading-state.model";
-import {NbDialogRef, NbDialogService, NbGlobalPhysicalPosition, NbToastrService} from "@nebular/theme";
+import {NbDialogService, NbGlobalPhysicalPosition, NbToastrService} from "@nebular/theme";
 import {CustomerPagination} from "../../../../core/models/customer-pagination.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AddEditCustomerComponent} from "../add-edit-customer/add-edit-customer.component";
@@ -123,9 +123,10 @@ export class CustomersListComponent implements OnInit {
     this.onSearch();
   }
 
-  onAddEditCustomer(id?: number) {
+  onAddEditCustomer(viewMode:boolean, id?: number) {
     this.dialogService.open(AddEditCustomerComponent, {
       context: {
+        viewMode:viewMode,
         id: id,
       },
     });

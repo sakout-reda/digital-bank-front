@@ -19,7 +19,7 @@ export class CustomerService {
     return this.http.get<Customer>(this.host + "customers/" + id);
   }
 
-  public searchCustomer(elementPerPage: number, pageNumber: number, sortValue: string, sortDirection: String, searchFormGroup: FormGroup): Observable<CustomerPagination> {
+  public searchCustomer(elementPerPage: number, pageNumber: number, sortValue: string, sortDirection: string, searchFormGroup: FormGroup): Observable<CustomerPagination> {
     return this.http.get<CustomerPagination>(this.host + "customers/search?page=" + pageNumber +
       "&size=" + elementPerPage +
       "&sortBy=" + sortValue +
