@@ -16,12 +16,12 @@
         <div class=" col-6">
           <input formControlName="fullName" type="text"
                  class="form-control form-control-sm text-capitalize" id="fullName"
-                 [ngClass]="{'is-invalid':c['fullName'].touched && c['fullName'].errors}"
+                 [ngClass]="{'is-invalid':submitted && (c['fullName'].errors || c['fullName'].touched)}"
           >
           <div class="invalid-feedback d-block position-relative"
-               *ngIf="c['fullName'].touched
-                       && c['fullName'].errors
-                       && c['fullName'].errors!['required']"
+               *ngIf=" submitted
+               && c['fullName'].errors
+               && c['fullName'].errors!['required']"
           >
             <small>Champs obligatoires non renseignés</small>
           </div>
@@ -33,14 +33,14 @@
             class="text-danger"><sup>*</sup></span></label>
         </div>
         <div class=" col-6">
-          <input formControlName="birthday" class="form-control form-control-sm"
-                 [ngClass]="{'is-invalid':c['birthday'].touched && c['birthday'].errors}" id="birthday"
+          <input formControlName="birthday" class="form-control form-control-sm" id="birthday"
+                 [ngClass]="{'is-invalid':submitted && (c['birthday'].errors || c['birthday'].touched)}"
                  nbInput [nbDatepicker]="dateTimePicker">
           <nb-datepicker format="dd/MM/yyyy" #dateTimePicker></nb-datepicker>
           <div class="invalid-feedback d-block position-relative"
-               *ngIf="c['birthday'].touched
-                       && c['birthday'].errors
-                       && c['birthday'].errors!['required']"
+               *ngIf=" submitted
+               && c['birthday'].errors
+               && c['birthday'].errors!['required']"
           >
             <small>Champs obligatoires non renseignés</small>
           </div>
@@ -54,12 +54,12 @@
         <div class=" col-6">
           <input formControlName="phoneNumber" type="text"
                  class="form-control form-control-sm" id="phoneNumber"
-                 [ngClass]="{'is-invalid':c['phoneNumber'].touched && c['phoneNumber'].errors}"
+                 [ngClass]="{'is-invalid':submitted && (c['phoneNumber'].errors || c['phoneNumber'].touched)}"
           >
           <div class="invalid-feedback d-block position-relative"
-               *ngIf="c['phoneNumber'].touched
-                       && c['phoneNumber'].errors
-                       && c['phoneNumber'].errors!['required']"
+               *ngIf=" submitted
+               && c['phoneNumber'].errors
+               && c['phoneNumber'].errors!['required']"
           >
             <small>Champs obligatoires non renseignés</small>
           </div>
@@ -73,12 +73,12 @@
         <div class=" col-6">
           <input formControlName="adress" type="text"
                  class="form-control form-control-sm text-capitalize" id="adress"
-                 [ngClass]="{'is-invalid':c['adress'].touched && c['adress'].errors}"
+                 [ngClass]="{'is-invalid':submitted && (c['adress'].errors || c['adress'].touched)}"
           >
           <div class="invalid-feedback d-block position-relative"
-               *ngIf="c['adress'].touched
-                       && c['adress'].errors
-                       && c['adress'].errors!['required']"
+               *ngIf=" submitted
+               && c['adress'].errors
+               && c['adress'].errors!['required']"
           >
             <small>Champs obligatoires non renseignés</small>
           </div>
@@ -92,12 +92,12 @@
         <div class=" col-6">
           <input formControlName="email" type="email"
                  class="form-control form-control-sm text-capitalize" id="email"
-                 [ngClass]="{'is-invalid':c['email'].touched && c['email'].errors}"
+                 [ngClass]="{'is-invalid':submitted && (c['email'].errors || c['email'].touched)}"
           >
           <div class="invalid-feedback d-block position-relative"
-               *ngIf="c['email'].touched
-                       && c['email'].errors
-                       && c['email'].errors!['required']"
+               *ngIf=" submitted
+               && c['email'].errors
+               && c['email'].errors!['required']"
           >
             <small>Champs obligatoires non renseignés</small>
           </div>

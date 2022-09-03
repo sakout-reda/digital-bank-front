@@ -114,6 +114,7 @@ export class CustomersListComponent implements OnInit {
         id: id,
         delete:deleteMode
       },
-    });
+      autoFocus:false,
+    },);
   }
 }
