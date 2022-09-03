@@ -178,11 +178,11 @@
 
           <!--          INLINE ADD FORM-->
           <tr *ngFor="let c of result?.data?.content" class="text-truncate">
-            <td (click)="onCrudCustomer(true,c.id)" class="px-4">{{c.fullName}}</td>
-            <td (click)="onCrudCustomer(true,c.id)" class="px-4">{{c.birthday |date:'dd/MM/yyyy'}}</td>
-            <td (click)="onCrudCustomer(true,c.id)" class="px-4">{{c.phoneNumber}}</td>
-            <td (click)="onCrudCustomer(true,c.id)" class="px-4">{{c.adress}}</td>
-            <td (click)="onCrudCustomer(true,c.id)" class="px-4">{{c.email}}</td>
+            <td (click)="onCrudCustomer(true,c.id)" class="px-4 text-capitalize">{{c.fullName}}</td>
+            <td (click)="onCrudCustomer(true,c.id)" class="px-4 ">{{c.birthday |date:'dd/MM/yyyy'}}</td>
+            <td (click)="onCrudCustomer(true,c.id)" class="px-4 ">{{c.phoneNumber}}</td>
+            <td (click)="onCrudCustomer(true,c.id)" class="px-4 text-capitalize">{{c.adress}}</td>
+            <td (click)="onCrudCustomer(true,c.id)" class="px-4 text-capitalize">{{c.email}}</td>
             <td (click)="onCrudCustomer(false,c.id)" class="editIcon text-center">
               <nb-icon icon="pencil"></nb-icon>
             </td>

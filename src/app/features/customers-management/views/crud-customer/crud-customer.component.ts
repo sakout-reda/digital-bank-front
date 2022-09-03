@@ -77,26 +77,38 @@ export class CrudCustomerComponent implements OnInit {
   }
 
   onAddCustomer() {
-    let customer:Customer=this.customerFormGroup.value;
+    let customer: Customer = this.customerFormGroup.value;
     this.customerService.saveCustomer(customer).subscribe({
-      next: data=>{
+      next: () => {
         this.showToast('Customer Added', 'Success', 'success');
       },
-      error: err =>{
+      error: () => {
         this.showToast('Une erreur est survenu', 'Erreur', 'danger');
       }
     });
   }
 
   onUpdateCustomer() {
-    this.showToast('Customer updated', 'Success', 'success');
+    let customer: Customer = this.customerFormGroup.value;
+    this.customerService.updateCustomer(this.id, customer).subscribe({
+      next: () => {
+        this.showToast('Customer updated', 'Success', 'success');
+      },
+      error: () => {
+        this.showToast('Une erreur est survenu', 'Erreur', 'danger');
+      }
+    });
   }
 
   onDelete() {
-    this.showToast('Customer Deleted', 'Success', 'success');
-
+    this.customerService.deleteCustomer(this.id).subscribe({
+      next: () => {
+        this.showToast('Customer Deleted', 'Success', 'success');
+      },
+      error: () => {
+        this.showToast('Une erreur est survenu', 'Erreur', 'danger');
+      }
+    });
   }
-
-
 }
 

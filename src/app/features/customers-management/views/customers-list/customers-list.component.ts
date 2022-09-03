@@ -19,14 +19,13 @@ export class CustomersListComponent implements OnInit {
   // addFormActive = true;
   elementPerPage = 10;
   pageNumber = 0;
-  sortDirection = true;
+  sortDirection = false;
   IsHidden = true;
   sortValue: string = "";
   currenSearchValue: string = "";
   positions = NbGlobalPhysicalPosition;
   firstEntry = true;
   searchFormGroup!: FormGroup;
-  AddCustomerFormGroup!: FormGroup;
 
   constructor(private customerService: CustomerService, private toastrService: NbToastrService,
               private fb: FormBuilder, private dialogService: NbDialogService) {
@@ -37,21 +36,6 @@ export class CustomersListComponent implements OnInit {
     this.initSearchForm();
     this.searchCustomerByKeyword();
   }
-
-  // fetchData() {
-  //   this.data$ = this.customerService.getCustomers(this.elementPerPage, this.pageNumber, this.sortValue, this.sortDirection ? 'ASC' : 'DESC').pipe(
-  //     map(response => {
-  //       return ({dataState: DataStateEnum.LOADED, data: response})
-  //
-  //     }),
-  //     startWith({dataState: DataStateEnum.LOADING}),
-  //     catchError(err => of({
-  //       dataState: DataStateEnum.ERROR,
-  //       errorMessage: err.message,
-  //       this: this.showToast('Une erreur technique est survenue', "Erreur", "danger")
-  //     }))
-  //   );
-  // }
 
   searchCustomerByKeyword() {
     this.data$ = this.customerService.searchCustomer(this.elementPerPage, this.pageNumber, this.sortValue, this.sortDirection ? 'ASC' : 'DESC', this.searchFormGroup).pipe(

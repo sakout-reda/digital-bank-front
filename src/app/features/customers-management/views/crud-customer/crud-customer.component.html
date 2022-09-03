@@ -15,7 +15,7 @@
         </div>
         <div class=" col-6">
           <input formControlName="fullName" type="text"
-                 class="form-control form-control-sm" id="fullName"
+                 class="form-control form-control-sm text-capitalize" id="fullName"
                  [ngClass]="{'is-invalid':c['fullName'].touched && c['fullName'].errors}"
           >
           <div class="invalid-feedback d-block position-relative"
@@ -72,7 +72,7 @@
         </div>
         <div class=" col-6">
           <input formControlName="adress" type="text"
-                 class="form-control form-control-sm" id="adress"
+                 class="form-control form-control-sm text-capitalize" id="adress"
                  [ngClass]="{'is-invalid':c['adress'].touched && c['adress'].errors}"
           >
           <div class="invalid-feedback d-block position-relative"
@@ -91,7 +91,7 @@
         </div>
         <div class=" col-6">
           <input formControlName="email" type="email"
-                 class="form-control form-control-sm" id="email"
+                 class="form-control form-control-sm text-capitalize" id="email"
                  [ngClass]="{'is-invalid':c['email'].touched && c['email'].errors}"
           >
           <div class="invalid-feedback d-block position-relative"

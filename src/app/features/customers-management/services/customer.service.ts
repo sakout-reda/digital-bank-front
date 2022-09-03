@@ -39,4 +39,12 @@ export class CustomerService {
   public saveCustomer(customer:Customer): Observable<Customer> {
     return this.http.post<Customer>(this.host + "customers/", customer);
   }
+
+  public updateCustomer(id:number, customer:Customer): Observable<Customer> {
+    return this.http.put<Customer>(this.host + "customers/"+id, customer);
+  }
+
+  public deleteCustomer(id:number){
+    return this.http.delete(this.host + "customers/"+id);
+  }
 }
