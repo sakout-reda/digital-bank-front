@@ -4,7 +4,7 @@ import {CustomerService} from "../../services/customer.service";
 import {first, Observable} from "rxjs";
 import {AppDataState} from "../../../../core/models/loading-state.model";
 import {Customer} from "../../../../core/models/customer.model";
-import {NbToastrService} from "@nebular/theme";
+import {NbDialogRef, NbToastrService} from "@nebular/theme";
 
 @Component({
   selector: 'DB-add-edit-customer',
@@ -25,7 +25,7 @@ export class CrudCustomerComponent implements OnInit {
   submitted = false;
 
   constructor(private customerService: CustomerService, private fb: FormBuilder,
-              private toastrService: NbToastrService) {
+              private toastrService: NbToastrService, protected dialogRef: NbDialogRef<CrudCustomerComponent>) {
   }
 
   ngOnInit(): void {
@@ -81,6 +81,7 @@ export class CrudCustomerComponent implements OnInit {
     this.customerService.saveCustomer(customer).subscribe({
       next: () => {
         this.showToast('Customer Added', 'Success', 'success');
+        this.dismiss();
       },
       error: () => {
         this.showToast('Une erreur est survenu', 'Erreur', 'danger');
@@ -93,6 +94,7 @@ export class CrudCustomerComponent implements OnInit {
     this.customerService.updateCustomer(this.id, customer).subscribe({
       next: () => {
         this.showToast('Customer updated', 'Success', 'success');
+        this.dismiss();
       },
       error: () => {
         this.showToast('Une erreur est survenu', 'Erreur', 'danger');
@@ -104,11 +106,16 @@ export class CrudCustomerComponent implements OnInit {
     this.customerService.deleteCustomer(this.id).subscribe({
       next: () => {
         this.showToast('Customer Deleted', 'Success', 'success');
+        this.dismiss();
       },
       error: () => {
         this.showToast('Une erreur est survenu', 'Erreur', 'danger');
       }
     });
+  }
+
+  dismiss() {
+    this.dialogRef.close();
   }
 }
 

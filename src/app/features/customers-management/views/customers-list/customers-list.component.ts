@@ -108,7 +108,7 @@ export class CustomersListComponent implements OnInit {
   }
 
   onCrudCustomer(viewMode: boolean, id?: number, deleteMode?:boolean) {
-    this.dialogService.open(CrudCustomerComponent, {
+    const dialogRef =this.dialogService.open(CrudCustomerComponent, {
       context: {
         viewMode: viewMode,
         id: id,
@@ -117,4 +117,5 @@ export class CustomersListComponent implements OnInit {
       autoFocus:false,
     },);
   }
+
 }
