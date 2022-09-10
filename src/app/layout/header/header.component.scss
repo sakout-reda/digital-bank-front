@@ -1,0 +1,26 @@
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+
+nb-user {
+  cursor: pointer;
+}
+
+nb-icon{
+  font-size: 1.75rem;
+}
+.logo {
+  font-size: 1.75rem;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.verticalLigne{
+  content: "";
+  width: 1px;
+  height: 100%;
+  margin:0 20px;
+  background: #edf1f7;
+}
+

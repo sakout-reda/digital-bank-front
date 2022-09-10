@@ -2,8 +2,9 @@ import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {HeaderComponent} from "./header/header.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {FooterComponent} from "./footer/footer.component";
-import {NbCardModule, NbMenuModule} from "@nebular/theme";
+import {NbActionsModule, NbCardModule, NbIconModule, NbMenuModule, NbUserModule} from "@nebular/theme";
 import { LoadingComponent } from './loading/loading.component';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,11 @@ import { LoadingComponent } from './loading/loading.component';
   ],
   imports: [
     NbCardModule,
-    NbMenuModule.forRoot()
+    NbMenuModule.forRoot(),
+    NbIconModule,
+    RouterModule,
+    NbActionsModule,
+    NbUserModule
   ],
   providers: [],
 })

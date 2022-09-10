@@ -1,1 +1,18 @@
-<p>header works!</p>
+<div class="d-flex justify-content-between">
+      <div class="logo-container">
+        <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+          <nb-icon icon="list"></nb-icon>
+        </a>
+        <div class="verticalLigne"></div>
+        <a class="logo" routerLink="./">My Awesome Logo</a>
+      </div>
+      <div class="user-container">
+        <nb-actions>
+          <nb-action class="user-action">
+            <nb-user name="John Doe"
+                     title="Engineer">
+            </nb-user>
+          </nb-action>
+        </nb-actions>
+      </div>
+</div>
