@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,12 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NbDateFnsDateModule} from "@nebular/date-fns";
+import {KeycloakSecurityService} from "./core/services/keycloak-security.service";
+
+function kcFactory(kcSecurity:KeycloakSecurityService) {
+  return ()=> kcSecurity.init();
+}
+
 @NgModule({
   declarations: [
     AppComponent
@@ -34,7 +40,9 @@ import {NbDateFnsDateModule} from "@nebular/date-fns";
     FeaturesModule,
     NbDateFnsDateModule
   ],
-  providers: [],
+  providers: [{
+    provide:APP_INITIALIZER,deps:[KeycloakSecurityService],useFactory:kcFactory,multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,13 +4,18 @@
           <nb-icon icon="list"></nb-icon>
         </a>
         <div class="verticalLigne"></div>
-        <a class="logo" routerLink="./">My Awesome Logo</a>
+<!--        <a class="logo" routerLink="./">My Awesome Logo</a>-->
+        <span *ngIf="securityService.kc.authenticated">
+<!--          {{securityService.kc.userInfo|json}}-->
+        </span>
       </div>
       <div class="user-container">
         <nb-actions>
           <nb-action class="user-action">
-            <nb-user name="John Doe"
-                     title="Engineer">
+            <nb-user name="Nikita Poltoratsky"
+                     title="full-stack developer"
+                     [nbContextMenu]="userMenu"
+                     nbContextMenuTag="userContextMenu">
             </nb-user>
           </nb-action>
         </nb-actions>

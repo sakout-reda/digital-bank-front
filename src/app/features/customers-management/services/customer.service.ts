@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {CustomerPagination} from "../../../core/models/customer-pagination.model";
 import {FormGroup} from "@angular/forms";
 import {Customer} from "../../../core/models/customer.model";
+import {KeycloakSecurityService} from "../../../core/services/keycloak-security.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import {Customer} from "../../../core/models/customer.model";
 export class CustomerService {
   host = environment.host;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private securityService:KeycloakSecurityService) {
   }
 
   public getCustomer(id:number): Observable<Customer> {
@@ -28,7 +29,10 @@ export class CustomerService {
       "&adress=" + searchFormGroup.controls['adress'].value +
       "&email=" + searchFormGroup.controls['email'].value +
       "&phoneNumber=" + searchFormGroup.controls['phoneNumber'].value +
-      "&birthday=" + searchFormGroup.controls['birthday'].value);
+      "&birthday=" + searchFormGroup.controls['birthday'].value,
+      {headers:new HttpHeaders({
+          'Authorization':'Bearer '+this.securityService.kc.token
+        })});
 
     // "&fullName=" + searchFormGroup.controls['fullName'].value.toLowerCase() +
     // "&adress=" + searchFormGroup.controls['adress'].value.toLowerCase() +
