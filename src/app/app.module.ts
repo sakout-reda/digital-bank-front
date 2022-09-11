@@ -1,8 +1,8 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {NbButtonModule, NbLayoutModule, NbSidebarModule, NbThemeModule} from "@nebular/theme";
 import {CoreModule} from "./core/core.module";
 import {LayoutModule} from "./layout/layout.module";
@@ -13,10 +13,23 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NbDateFnsDateModule} from "@nebular/date-fns";
-import {KeycloakSecurityService} from "./core/services/keycloak-security.service";
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 
-function kcFactory(kcSecurity:KeycloakSecurityService) {
-  return ()=> kcSecurity.init();
+function initializeKeycloak (keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8180/auth',
+        realm: 'digital-bank-realm',
+        clientId: 'angular-digital-bank',
+      },
+      initOptions: {
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html',
+      },
+      loadUserProfileAtStartUp: true
+    });
 }
 
 @NgModule({
@@ -38,10 +51,14 @@ function kcFactory(kcSecurity:KeycloakSecurityService) {
     SharedModule,
     ViewsModule,
     FeaturesModule,
-    NbDateFnsDateModule
+    NbDateFnsDateModule,
+    KeycloakAngularModule
   ],
   providers: [{
-    provide:APP_INITIALIZER,deps:[KeycloakSecurityService],useFactory:kcFactory,multi:true
+    provide:APP_INITIALIZER,
+    useFactory:initializeKeycloak,
+    multi:true,
+    deps:[KeycloakService],
   }],
   bootstrap: [AppComponent]
 })

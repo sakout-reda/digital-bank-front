@@ -1,7 +1,10 @@
 import {NgModule, Optional, SkipSelf} from "@angular/core";
+import { PermissionDeniedComponent } from './permission-denied/permission-denied.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PermissionDeniedComponent
+  ],
   imports: [],
   providers: [],
 })

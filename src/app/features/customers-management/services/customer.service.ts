@@ -5,7 +5,7 @@ import {environment} from "../../../../environments/environment";
 import {CustomerPagination} from "../../../core/models/customer-pagination.model";
 import {FormGroup} from "@angular/forms";
 import {Customer} from "../../../core/models/customer.model";
-import {KeycloakSecurityService} from "../../../core/services/keycloak-security.service";
+import {KeycloakService} from "keycloak-angular";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ import {KeycloakSecurityService} from "../../../core/services/keycloak-security.
 export class CustomerService {
   host = environment.host;
 
-  constructor(private http: HttpClient, private securityService:KeycloakSecurityService) {
+  constructor(private http: HttpClient, private keycloakService:KeycloakService) {
   }
 
   public getCustomer(id:number): Observable<Customer> {
@@ -31,7 +31,7 @@ export class CustomerService {
       "&phoneNumber=" + searchFormGroup.controls['phoneNumber'].value +
       "&birthday=" + searchFormGroup.controls['birthday'].value,
       {headers:new HttpHeaders({
-          'Authorization':'Bearer '+this.securityService.kc.token
+          'Authorization':'Bearer '+this.keycloakService.getToken()
         })});
 
     // "&fullName=" + searchFormGroup.controls['fullName'].value.toLowerCase() +

@@ -1,7 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {NB_WINDOW, NbMenuService, NbSidebarService} from "@nebular/theme";
-import {KeycloakSecurityService} from "../../core/services/keycloak-security.service";
+import {Component, OnInit} from '@angular/core';
+import {NbMenuService, NbSidebarService} from "@nebular/theme";
 import {filter, map} from "rxjs";
+import {KeycloakService} from "keycloak-angular";
+import {KeycloakProfile} from "keycloak-js";
 
 @Component({
   selector: 'DB-header',
@@ -9,6 +10,9 @@ import {filter, map} from "rxjs";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  isLogged = false;
+  loggedUserName = '';
+  userProfile: KeycloakProfile | null = null;
 
   userMenu = [
 
@@ -28,10 +32,16 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
               private nbMenuService: NbMenuService,
-              public securityService: KeycloakSecurityService) {
+              private keycloakService: KeycloakService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.isLogged = await this.keycloakService.isLoggedIn();
+
+    if (this.isLogged) {
+      this.userProfile = await this.keycloakService.loadUserProfile();
+      this.loggedUserName = this.userProfile?.firstName + " " + this.userProfile.lastName;
+    }
     this.nbMenuService.onItemClick().pipe(
       filter(({tag}) => tag === 'userContextMenu'),
       map(({item: {title}}) => title),
@@ -47,12 +57,11 @@ export class HeaderComponent implements OnInit {
   onMenuItemClick(item: string) {
     switch (item) {
       case 'Logout' : {
-        this.securityService.kc.logout();
-        this.securityService.kc.login();
+        this.keycloakService.logout(window.location.origin);
         break;
       }
       case 'Change Password' : {
-        this.securityService.kc.accountManagement();
+        // this.securityService.kc.accountManagement();
         break;
       }
     }

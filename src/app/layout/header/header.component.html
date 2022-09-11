@@ -1,23 +1,20 @@
 <div class="d-flex justify-content-between">
-      <div class="logo-container">
-        <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
-          <nb-icon icon="list"></nb-icon>
-        </a>
-        <div class="verticalLigne"></div>
-<!--        <a class="logo" routerLink="./">My Awesome Logo</a>-->
-        <span *ngIf="securityService.kc.authenticated">
-<!--          {{securityService.kc.userInfo|json}}-->
-        </span>
-      </div>
-      <div class="user-container">
-        <nb-actions>
-          <nb-action class="user-action">
-            <nb-user name="Nikita Poltoratsky"
-                     title="full-stack developer"
-                     [nbContextMenu]="userMenu"
-                     nbContextMenuTag="userContextMenu">
-            </nb-user>
-          </nb-action>
-        </nb-actions>
-      </div>
+  <div class="logo-container">
+    <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+      <nb-icon icon="list"></nb-icon>
+    </a>
+    <div class="verticalLigne"></div>
+    <a class="logo" routerLink="./">My Awesome Logo</a>
+  </div>
+  <div class="user-container">
+    <nb-actions>
+      <nb-action class="user-action">
+        <nb-user [name]="loggedUserName"
+                 title="full-stack developer"
+                 [nbContextMenu]="userMenu"
+                 nbContextMenuTag="userContextMenu">
+        </nb-user>
+      </nb-action>
+    </nb-actions>
+  </div>
 </div>
