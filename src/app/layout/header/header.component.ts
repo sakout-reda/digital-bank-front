@@ -18,15 +18,15 @@ export class HeaderComponent implements OnInit {
 
     {
       title: 'Profile',
-      link: '/'
+      icon: 'person-circle',
     },
     {
       title: 'Change Password',
-      link: '/'
+      icon: 'gear',
     },
     {
       title: 'Logout',
-      link: '/'
+      icon: 'box-arrow-left',
     },
   ];
 
@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit {
         break;
       }
       case 'Change Password' : {
-        // this.securityService.kc.accountManagement();
+        this.keycloakService.login({action:"UPDATE_PASSWORD"});
         break;
       }
     }
