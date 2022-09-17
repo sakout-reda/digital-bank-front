@@ -14,23 +14,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NbDateFnsDateModule} from "@nebular/date-fns";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
-
-function initializeKeycloak (keycloak: KeycloakService) {
-  return () =>
-    keycloak.init({
-      config: {
-        url: 'http://localhost:8180/auth',
-        realm: 'digital-bank-realm',
-        clientId: 'angular-digital-bank',
-      },
-      initOptions: {
-        onLoad: 'check-sso',
-        silentCheckSsoRedirectUri:
-          window.location.origin + '/assets/silent-check-sso.html',
-      },
-      loadUserProfileAtStartUp: true
-    });
-}
+import {initializeKeycloak} from "./app-init.module";
 
 @NgModule({
   declarations: [
