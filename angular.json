@@ -103,7 +103,8 @@
               "browserTarget": "DigitalBank_Front:build:production"
             },
             "development": {
-              "browserTarget": "DigitalBank_Front:build:development"
+              "browserTarget": "DigitalBank_Front:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

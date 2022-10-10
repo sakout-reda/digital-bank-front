@@ -1,0 +1,135 @@
+<ng-container *ngIf="(data$ | async) as result" [ngSwitch]="result.dataState">
+  <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+    <DB-loading></DB-loading>
+  </ng-container>
+  <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+    <nb-card>
+      <nb-card-header class="d-flex flex-row justify-content-between">
+        <div>Account List</div>
+        <div>Éléments par page :
+          <nb-select size="small" placeholder="Élément par page" selected="{{elementPerPage}}"
+                     (selectedChange)="onElementPerPageChange($event)">
+            <nb-option value="10">10</nb-option>
+            <nb-option value="20">20</nb-option>
+            <nb-option value="50">50</nb-option>
+            <nb-option value="100">100</nb-option>
+          </nb-select>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Accordion Item #1
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+              <p>Hello</p>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+
+        <div class="row d-flex flex-row p-3 justify-content-center">
+          <ng-container *ngFor="let a of result?.data?.content">
+            <div class="account-card card col-2 m-3 py-4 shadow">
+              <div class="general-info d-flex mx-auto">
+                <div class=" profile-icon my-auto">
+                  <nb-icon icon="person-fill"></nb-icon>
+                </div>
+                <div class=" w-75 profile-info p-3 my-auto ">
+                  <div class="fullName fw-bold text-truncate">{{a.customerDTO?.fullName}}</div>
+                  <div class="email text-muted text-truncate">{{a.customerDTO?.email}}</div>
+                </div>
+              </div>
+
+              <div class="account-balance d-flex my-3 ">
+                <div class=" w-25 balance-icon bg-primary my-auto">
+                  <nb-icon icon="currency-dollar"></nb-icon>
+                </div>
+                <div class=" w-75 current-balance my-auto">
+                  <div class="label fw-bold text-truncate">Current Balance</div>
+                  <div class="balance text-truncate">{{a.balance|currency:'MAD':''}}<span class="text-dark"> MAD</span>
+                  </div>
+                </div>
+              </div>
+              <div class="account-details">
+                <div class="d-flex my-2 justify-content-between">
+                  <div class="account-type fw-bold">
+                    {{a.type == 'SavingAccount' ? 'Saving Account' : 'Current Account'}}
+                  </div>
+                  <div class="account-type">
+                    <nb-icon [ngClass]="a.status === AccountStatus.CREATED ? 'text-warning':
+                                        a.status === AccountStatus.ACTIVATED ? 'text-success':
+                                        a.status === AccountStatus.SUSPENDED ? 'text-danger':''"
+                             title="{{a.status}}" icon="bookmark-fill"></nb-icon>
+
+                  </div>
+                </div>
+              </div>
+              <div class="created-at text-center mt-5 mx-auto card">
+                {{a.createdAt| date:'dd/MM/yyyy HH:mm'}}
+              </div>
+            </div>
+          </ng-container>
+
+        </div>
+      </nb-card-body>
+      <nb-card-footer class="d-flex justify-content-center">
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item">
+            <button (click)="onPageNumberChange(0)"
+                    [ngClass]="result?.data?.first ? 'text-gray disabled border-light' : 'text-primary'" class="btn">
+              <nb-icon icon="chevron-double-left"></nb-icon>
+            </button>
+          </li>
+          <li class="list-group-item">
+            <button (click)="onPageNumberChange(pageNumber-1)"
+                    [ngClass]="result?.data?.first ? 'text-gray disabled border-light' : 'text-primary'" class="btn">
+              <nb-icon icon="chevron-left"></nb-icon>
+            </button>
+          </li>
+          <li class="list-group-item text-truncate"
+              *ngFor='let nbr of toTotalPages(result?.data!.totalPages <9 ? result?.data!.totalPages : 9) ;let i = index'>
+
+            <span
+              *ngIf="(result?.data!.number <= result?.data!.totalPages-9) || (result?.data!.totalPages <9);else printlastPages">
+              <button (click)="onPageNumberChange(result?.data!.number < 5 ? i : result?.data!.number-4+i)"
+                      [ngClass]="pageNumber==(result?.data!.number < 5 ? i : result?.data!.number-4 + i) ?'text-light bg-primary' : 'text-primary'"
+                      class="btn ">
+                {{(result?.data!.number < 5 ? 1 + i : result?.data!.number - 3 + i)}}
+              </button>
+            </span>
+            <ng-template #printlastPages>
+              <button (click)="onPageNumberChange(result?.data!.totalPages - 9 + i)"
+                      [ngClass]="pageNumber==(result?.data!.totalPages - 9 + i) ?'text-light bg-primary' : 'text-primary'"
+                      class="btn ">
+                {{(result?.data!.totalPages - 8 + i)}}
+              </button>
+            </ng-template>
+
+          </li>
+          <li class="list-group-item">
+            <button (click)="onPageNumberChange(pageNumber+1)"
+                    [ngClass]="result?.data?.last ? 'text-gray disabled border-light' : 'text-primary'" class="btn">
+              <nb-icon icon="chevron-right"></nb-icon>
+            </button>
+          </li>
+          <li class="list-group-item">
+            <button (click)="onPageNumberChange(result?.data!.totalPages -1 )"
+                    [ngClass]="result?.data?.last ? 'text-gray disabled border-light' : 'text-primary'" class="btn">
+              <nb-icon icon="chevron-double-right"></nb-icon>
+            </button>
+          </li>
+        </ul>
+      </nb-card-footer>
+    </nb-card>
+  </ng-container>
+</ng-container>
+
+

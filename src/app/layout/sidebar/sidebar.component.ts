@@ -16,8 +16,13 @@ export class SidebarComponent implements OnInit {
     },
     {
       title: 'Customers',
-      icon: 'person-fill',
+      icon: 'people-fill',
       link: '/customers'
+    },
+    {
+      title: 'Accounts',
+      icon: 'file-earmark-person',
+      link: '/accounts'
     },
     {
       title: 'Profile',

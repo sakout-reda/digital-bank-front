@@ -16,7 +16,6 @@ export class CustomersListComponent implements OnInit {
   data$: Observable<AppDataState<CustomerPagination>> | undefined;
   errorMessage!: string;
   readonly DataStateEnum = DataStateEnum;
-  // addFormActive = true;
   elementPerPage = 10;
   pageNumber = 0;
   sortDirection = false;
@@ -32,7 +31,6 @@ export class CustomersListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.fetchData();
     this.initSearchForm();
     this.searchCustomerByKeyword();
   }

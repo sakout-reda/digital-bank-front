@@ -1,0 +1,132 @@
+tbody tr td{
+  border: 1px solid #EDF1F7;
+}
+tbody tr:hover{
+  background:#EDF1F7;
+  cursor: pointer;
+}
+thead tr td:hover{
+  cursor: pointer;
+
+}
+tbody tr:nth-child(even){
+  background: #F7F9FC;
+}
+nb-card-footer{
+  ul{
+    li{
+      padding: 0;
+      button{
+        font-size:15px;
+        nb-icon{
+          font-size: 12px;
+        }
+      }
+      button:focus{
+        outline: none;
+        box-shadow: none;
+      }
+    }
+  }
+}
+.editIcon, .deleteIcon, #validateIcon, #cancelIcon{
+  font-size: 25px;
+}
+#validateIcon, #cancelIcon{
+  margin-top: 5px;
+}
+#validateIcon:hover{
+  color:#01D68F;
+}
+.editIcon:hover{
+  color: #FFC107;
+}
+#cancelIcon:hover, .deleteIcon:hover{
+  color: #FF3D71;
+}
+.verticalLign{
+  content:"";
+  width: 2px;
+  height: auto;
+  background: #F2F2F2;
+  top:0;
+  left: 0;
+  position: relative;
+}
+.account-card{
+  .general-info{
+    .profile-icon{
+      text-align: center;
+      border: 1px solid #0D6EFD;
+      border-radius: 50%;
+      height: 50px;
+      width: 50px;
+      position: relative;
+      nb-icon{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        font-size: 35px;
+      }
+    }
+    .profile-info{
+      .fullName{
+        font-size: 17px;
+      }
+      .email{
+        font-size: 12px;
+        line-height: 15px;
+      }
+    }
+  }
+  .account-balance{
+    background: #EEEEEE;
+    border-radius: 5px;
+    border: 1px solid #0D6EFD ;
+    padding: 10px 5px;
+    .balance-icon{
+      text-align: center;
+      border: 2px solid #0D6EFD;
+      border-radius: 10px;
+      height: 55px;
+      width: 60px;
+      position: relative;
+      nb-icon{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        font-size: 20px;
+        color: #0D6EFD ;
+        background: #fff;
+        border-radius: 50%;
+      }
+    }
+    .current-balance{
+      .label{
+        text-align: right;
+        font-size: 15px;
+        color: #303030;
+      }
+      .balance{
+        font-size: 15px;
+        font-weight: bold;
+        text-align: right;
+        color: #0D6EFD;
+        //filter: blur(4px);
+        padding: 10px 0;
+        cursor: pointer;
+      }
+      //.balance:hover{
+      //  filter: blur(0);
+      //}
+    }
+  }
+}
+.created-at{
+  font-size: 13px;
+  background: #f3f3f3;
+  font-weight: bold;
+  padding: 0 10px;
+}

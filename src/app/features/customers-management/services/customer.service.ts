@@ -29,10 +29,7 @@ export class CustomerService {
       "&adress=" + searchFormGroup.controls['adress'].value +
       "&email=" + searchFormGroup.controls['email'].value +
       "&phoneNumber=" + searchFormGroup.controls['phoneNumber'].value +
-      "&birthday=" + searchFormGroup.controls['birthday'].value,
-      {headers:new HttpHeaders({
-          'Authorization':'Bearer '+this.keycloakService.getToken()
-        })});
+      "&birthday=" + searchFormGroup.controls['birthday'].value);
 
     // "&fullName=" + searchFormGroup.controls['fullName'].value.toLowerCase() +
     // "&adress=" + searchFormGroup.controls['adress'].value.toLowerCase() +
